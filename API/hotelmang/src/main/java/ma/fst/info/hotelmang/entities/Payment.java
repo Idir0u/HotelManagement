@@ -13,15 +13,17 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "admins")
-public class Admin {
+@Table(name = "payments")
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
-    private String email;
-    private String phoneNumber;
-    private String password;
-    private String address;
+    private String paymentMethod;
+    private float amount;
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
 }
