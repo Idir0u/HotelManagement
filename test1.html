@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="bg-gray-50 p-6 shadow-lg rounded-lg">
+        <!-- Section Prix -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Prix par nuit</label>
+          <div class="flex items-center space-x-3 mt-2">
+            <input type="number" placeholder="Min" class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <span class="text-gray-500">-</span>
+            <input type="number" placeholder="Max" class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+        </div>
+      
+        <!-- Section Type de Chambre -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Type de chambre</label>
+          <div class="flex flex-wrap mt-2 gap-2">
+            <button class="px-3 py-1 text-sm bg-gray-200 rounded-full hover:bg-blue-400 hover:text-white focus:outline-none">Simple</button>
+            <button class="px-3 py-1 text-sm bg-gray-200 rounded-full hover:bg-blue-400 hover:text-white focus:outline-none">Double</button>
+            <button class="px-3 py-1 text-sm bg-gray-200 rounded-full hover:bg-blue-400 hover:text-white focus:outline-none">Suite</button>
+            <button class="px-3 py-1 text-sm bg-gray-200 rounded-full hover:bg-blue-400 hover:text-white focus:outline-none">Appartement</button>
+          </div>
+        </div>
+      
+        <!-- Section Équipements -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Équipements</label>
+          <div class="flex flex-wrap mt-2 gap-2">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" />
+              <span class="text-sm text-gray-700">Wi-Fi</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" />
+              <span class="text-sm text-gray-700">Climatisation</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" />
+              <span class="text-sm text-gray-700">Jacuzzi</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" />
+              <span class="text-sm text-gray-700">Vue sur mer</span>
+            </label>
+          </div>
+        </div>
+      
+        <!-- Section Disponibilité -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Dates de séjour</label>
+          <div class="flex items-center space-x-3 mt-2">
+            <input type="date" class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <span class="text-gray-500">à</span>
+            <input type="date" class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+        </div>
+      
+        <!-- Bouton d'application -->
+        <div class="mt-6">
+          <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300">
+            Appliquer les filtres
+          </button>
+        </div>
+      </div>
+      
+</body>
+</html>
