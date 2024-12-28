@@ -28,7 +28,9 @@
             </button>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-lg">
-            <p class="text-lg font-bold text-blue-700 mb-4">Click on the column headers to sort the table.</p>
+            <div class="mb-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+                <p><strong>Note:</strong> Click on the column headers to sort the table.</p>
+            </div>
             <table class="striped" id="roomTable">
                 <thead>
                     <tr>
@@ -41,159 +43,8 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Single</td>
-                        <td>1</td>
-                        <td>$80</td>
-                        <td class="description">Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.</td>
-                        <td>Available</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(1)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(1)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(1)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Double</td>
-                        <td>2</td>
-                        <td>$120</td>
-                        <td class="description">Spacious room for two guests with a comfortable double bed and modern amenities.</td>
-                        <td>Occupied</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(2)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(2)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(2)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Suite</td>
-                        <td>4</td>
-                        <td>$250</td>
-                        <td class="description">Luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.</td>
-                        <td>Available</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(3)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(3)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(3)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Family</td>
-                        <td>5</td>
-                        <td>$300</td>
-                        <td class="description">Ideal for families with children, offering multiple beds and a spacious living area.</td>
-                        <td>Occupied</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(4)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(4)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(4)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Single</td>
-                        <td>1</td>
-                        <td>$85</td>
-                        <td class="description">A cozy single room with modern amenities and a comfortable bed.</td>
-                        <td>Available</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(5)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(5)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(5)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Double</td>
-                        <td>2</td>
-                        <td>$130</td>
-                        <td class="description">A spacious double room with a comfortable bed and modern amenities.</td>
-                        <td>Available</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(6)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(6)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(6)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Suite</td>
-                        <td>4</td>
-                        <td>$260</td>
-                        <td class="description">A luxurious suite with a king-size bed, living area, and a spacious bathroom.</td>
-                        <td>Available</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(7)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(7)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(7)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Family</td>
-                        <td>5</td>
-                        <td>$320</td>
-                        <td class="description">A family room with multiple beds and a spacious living area.</td>
-                        <td>Occupied</td>
-                        <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(8)">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(8)">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(8)">
-                                <i class="material-icons">visibility</i>
-                            </button>
-                        </td>
-                    </tr>
+                <tbody id="roomTableBody">
+                    <!-- Rows will be dynamically generated here -->
                 </tbody>
             </table>
         </div>
@@ -297,6 +148,80 @@
     </div>
 
     <script>
+        /*
+        let rooms = [];
+        fetch('http://localhost:8081/rooms')
+            .then(response => response.json())
+            .then(data => {
+                rooms = data;
+                populateTable();
+                truncateDescriptions();
+            });
+        ---------------------------
+        continue with other crud operations:
+        ---------------------
+        add room: POST
+        function addRoom(room) {
+            fetch('http://localhost:8081/rooms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(room)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    rooms.push(data);
+                    populateTable();
+                    truncateDescriptions();
+                });
+        }
+        ---------------------
+        edit room: PUT
+        function editRoom(roomID, updatedRoom) {
+            fetch(`http://localhost:8081/rooms/${roomID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedRoom)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const index = rooms.findIndex(room => room.id === roomID);
+                    rooms[index] = data;
+                    populateTable();
+                    truncateDescriptions();
+                });
+        }
+        ---------------------
+        delete room: DELETE
+        function deleteRoom(roomID) {
+            fetch(`http://localhost:8081/rooms/${roomID}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    rooms = rooms.filter(room => room.id !== roomID);
+                    populateTable();
+                    truncateDescriptions();
+                });
+        }
+        */
+        const rooms = [
+                { id: 1, type: 'Single', capacity: 1, price: 80, description: 'Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.', status: 'Available' },
+                { id: 2, type: 'Double', capacity: 2, price: 120, description: 'Spacious room for two guests with a comfortable double bed and modern amenities.', status: 'Occupied' },
+                { id: 3, type: 'Suite', capacity: 4, price: 250, description: 'Luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
+                { id: 4, type: 'Family', capacity: 5, price: 300, description: 'Ideal for families with children, offering multiple beds and a spacious living area.', status: 'Occupied' },
+                { id: 5, type: 'Single', capacity: 1, price: 85, description: 'A cozy single room with modern amenities and a comfortable bed.', status: 'Available' },
+                { id: 6, type: 'Double', capacity: 2, price: 130, description: 'A spacious double room with a comfortable bed and modern amenities.', status: 'Available' },
+                { id: 7, type: 'Suite', capacity: 4, price: 260, description: 'A luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
+                { id: 8, type: 'Family', capacity: 5, price: 320, description: 'A family room with multiple beds and a spacious living area, perfect for families with children.', status: 'Occupied' },
+                { id: 9, type: 'Single', capacity: 1, price: 90, description: 'A cozy single room with modern amenities and a comfortable bed.', status: 'Available' },
+                { id: 10, type: 'Double', capacity: 2, price: 140, description: 'A spacious double room with a comfortable bed and modern amenities.', status: 'Available' },
+                { id: 11, type: 'Suite', capacity: 4, price: 270, description: 'A luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
+                { id: 12, type: 'Family', capacity: 5, price: 330, description: 'A family room with multiple beds and a spacious living area, perfect for families with children.' },
+            ];
+
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems);
@@ -304,14 +229,51 @@
             var selectElems = document.querySelectorAll('select');
             var selectInstances = M.FormSelect.init(selectElems);
 
-            // Truncate descriptions in the table
+            // Populate the table with initial data
+            populateTable();
+
+            // Truncate descriptions in the table after loading
+            truncateDescriptions();
+        });
+
+        function populateTable() {
+
+            const tableBody = document.getElementById('roomTableBody');
+            tableBody.innerHTML = '';
+
+            rooms.forEach(room => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${room.id}</td>
+                    <td>${room.type}</td>
+                    <td>${room.capacity}</td>
+                    <td>$${room.price}</td>
+                    <td class="description">${room.description}</td>
+                    <td>${room.status}</td>
+                    <td>
+                        <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(${room.id})">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button class="btn waves-effect waves-light red" onclick="confirmDelete(${room.id})">
+                            <i class="material-icons">delete</i>
+                        </button>
+                        <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(${room.id})">
+                            <i class="material-icons">visibility</i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function truncateDescriptions() {
             var descriptions = document.querySelectorAll('.description');
             descriptions.forEach(function(description) {
-                if (description.textContent.length > 50) {
-                    description.textContent = description.textContent.substring(0, 50) + '...';
+                if (description.textContent.length > 75) {
+                    description.textContent = description.textContent.substring(0, 75) + '...';
                 }
             });
-        });
+        }
 
         function sortTable(columnIndex) {
             var table = document.getElementById("roomTable");
@@ -336,7 +298,7 @@
 
         function editRoom(roomID) {
             // Populate the edit form with the room details
-            var row = document.querySelector(`tr:nth-child(${roomID})`);
+            var row = document.querySelector(`tr td:first-child:contains(${roomID})`).parentElement;
             var roomType = row.children[1].textContent;
             var capacity = row.children[2].textContent;
             var price = row.children[3].textContent.replace('$', '');
@@ -363,17 +325,18 @@
         }
 
         function deleteRoom(roomID) {
-            var row = document.querySelector(`tr:nth-child(${roomID})`);
+            var row = document.querySelector(`tr td:first-child:contains(${roomID})`).parentElement;
             row.remove();
         }
 
         function viewRoom(roomID) {
-            var row = document.querySelector(`tr:nth-child(${roomID})`);
-            var roomType = row.children[1].textContent;
-            var capacity = row.children[2].textContent;
-            var price = row.children[3].textContent;
-            var description = row.children[4].textContent;
-            var status = row.children[5].textContent;
+            var row = rooms.find(room => room.id === roomID);
+            var roomType = row.type;
+            var capacity = row.capacity;
+            var price = row.price;
+            var description = row.description;
+            var status = row.status;
+
 
             var imageSrc;
             switch (roomType.toLowerCase()) {
