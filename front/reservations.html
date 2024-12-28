@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-white">
+        <!-- Barre de navigation principale -->
+        <div class="container flex flex-col px-16 bg-white">
+            <div class="relative flex flex-wrap items-center justify-between w-full bg-white group py-7 shrink-0">
+                <div>
+                    <img class="h-16" src="Hotel IZY.png">
+                </div>
+                <div class="items-center justify-between hidden gap-12 text-black md:flex">
+                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Home</a>
+                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Rooms</a>
+                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking</a>
+                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Contact Us</a>
+                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">About Us</a>
+                </div>
+                <div class="items-center gap-8 md:flex">
+                    <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-yellow-700 text-white border border-yellow-700 hover:bg-white hover:text-yellow-700 transition duration-300">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boutons de navigation -->
+        <div class="flex justify-center bg-gray-100 py-4">
+            <button onclick="showSection('reservationForm')" class="px-6 py-2 mx-2 text-sm font-bold bg-yellow-500 text-white hover:bg-yellow-700 transition duration-300 rounded-lg">
+                Formulaire de Réservation
+            </button>
+            <button onclick="showSection('reservedRooms')" class="px-6 py-2 mx-2 text-sm font-bold bg-yellow-500 text-white hover:bg-yellow-700 transition duration-300 rounded-lg">
+                Liste des Chambres Réservées
+            </button>
+        </div>
+
+        <!-- Section Formulaire -->
+        <div id="reservationForm" class="container mx-auto mt-8 px-8 flex justify-center">
+            <div class="bg-gray-50 p-8 rounded-lg shadow-xl w-full max-w-lg">
+                <h2 class="text-3xl font-extrabold text-center text-dark-grey-900 mb-6">Formulaire de Réservation</h2>
+                <form>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="nom" class="block text-sm font-semibold text-gray-700">Nom</label>
+                            <input id="nom" type="text" placeholder="Votre nom" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div>
+                            <label for="prenom" class="block text-sm font-semibold text-gray-700">Prénom</label>
+                            <input id="prenom" type="text" placeholder="Votre prénom" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700">Email</label>
+                            <input id="email" type="email" placeholder="Votre email" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div>
+                            <label for="telephone" class="block text-sm font-semibold text-gray-700">Téléphone</label>
+                            <input id="telephone" type="tel" placeholder="Votre téléphone" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div>
+                            <label for="adresse" class="block text-sm font-semibold text-gray-700">Adresse</label>
+                            <textarea id="adresse" placeholder="Votre adresse" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-6 w-full py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-700 transition duration-300 max-w-xs mx-auto block">
+                        Réserver Maintenant
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Section Liste des Chambres Réservées -->
+        <div id="reservedRooms" class="hidden container mx-auto mt-8 px-8">
+            <h2 class="text-3xl font-extrabold text-center text-dark-grey-900 mb-6">Liste des Chambres Réservées</h2>
+            <ul class="space-y-4">
+                <!-- Chambre réservée 1 -->
+                <li class="bg-white shadow-lg rounded-lg p-6 border-l-4 border-yellow-500 flex items-start gap-4">
+                    <img src="chambre_1.jpg" alt="Room 1" class="w-24 h-24 rounded-md object-cover">
+                    <div>
+                        <h3 class="text-lg font-bold text-dark-grey-900">Suite Royale</h3>
+                        <p class="text-sm text-gray-700">Réservée par : John Doe</p>
+                        <p class="text-sm text-gray-700">Email : john.doe@example.com</p>
+                        <p class="text-sm text-gray-700">Téléphone : +212 123 456 789</p>
+                        <p class="text-sm text-gray-700">Date d'arrivée : 01/01/2024</p>
+                        <p class="text-sm text-gray-700">Durée : 3 nuits</p>
+                    </div>
+                </li>
+                <!-- Chambre réservée 2 -->
+                <li class="bg-white shadow-lg rounded-lg p-6 border-l-4 border-yellow-500 flex items-start gap-4">
+                    <img src="chambre_2.jpg" alt="Room 2" class="w-24 h-24 rounded-md object-cover">
+                    <div>
+                        <h3 class="text-lg font-bold text-dark-grey-900">Double Chambre Deluxe</h3>
+                        <p class="text-sm text-gray-700">Réservée par : Jane Smith</p>
+                        <p class="text-sm text-gray-700">Email : jane.smith@example.com</p>
+                        <p class="text-sm text-gray-700">Téléphone : +212 987 654 321</p>
+                        <p class="text-sm text-gray-700">Date d'arrivée : 02/01/2024</p>
+                        <p class="text-sm text-gray-700">Durée : 5 nuits</p>
+                    </div>
+                </li>
+                <!-- Chambre réservée 3 -->
+                <li class="bg-white shadow-lg rounded-lg p-6 border-l-4 border-yellow-500 flex items-start gap-4">
+                    <img src="chambre_3.jpg" alt="Room 3" class="w-24 h-24 rounded-md object-cover">
+                    <div>
+                        <h3 class="text-lg font-bold text-dark-grey-900">Chambre Simple</h3>
+                        <p class="text-sm text-gray-700">Réservée par : Alex Brown</p>
+                        <p class="text-sm text-gray-700">Email : alex.brown@example.com</p>
+                        <p class="text-sm text-gray-700">Téléphone : +212 555 666 777</p>
+                        <p class="text-sm text-gray-700">Date d'arrivée : 03/01/2024</p>
+                        <p class="text-sm text-gray-700">Durée : 2 nuits</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <script>
+            function showSection(sectionId) {
+                document.getElementById('reservationForm').classList.add('hidden');
+                document.getElementById('reservedRooms').classList.add('hidden');
+                document.getElementById(sectionId).classList.remove('hidden');
+            }
+        </script>
+    </body>
+</html>
