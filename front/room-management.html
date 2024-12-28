@@ -47,13 +47,13 @@
                         <td>$80</td>
                         <td>Available</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(1)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(1)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(1)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
@@ -65,13 +65,13 @@
                         <td>$120</td>
                         <td>Occupied</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(2)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(2)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(2)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
@@ -83,13 +83,13 @@
                         <td>$250</td>
                         <td>Available</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(3)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(3)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(3)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
@@ -101,18 +101,18 @@
                         <td>$300</td>
                         <td>Occupied</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(4)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(4)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(4)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
                     </tr>
-                    <!-- More rows as needed -->
+
                 </tbody>
             </table>
         </div>
@@ -254,9 +254,30 @@
             var price = row.children[3].textContent;
             var status = row.children[4].textContent;
 
+            var imageSrc;
+            switch (roomType.toLowerCase()) {
+                case 'single':
+                    imageSrc = 'single-room.jpg';
+                    break;
+                case 'double':
+                    imageSrc = 'double-room.jpg';
+                    break;
+                case 'suite':
+                    imageSrc = 'suite-room.jpg';
+                    break;
+                case 'family':
+                    imageSrc = 'family-room.jpg';
+                    break;
+                case 'twin':
+                imageSrc = 'twin-room.jpg';
+                break;
+                default:
+                    imageSrc = 'default-room.jpg';
+            }
+
             var roomDetails = `
                 <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
-                    <img src="single-room.jpg" alt="Room Image" class="w-full h-64 object-cover">
+                    <img src="${imageSrc}" alt="${roomType}" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-dark-grey-900">${roomType} Room</h3>
                         <p class="text-grey-700 text-base leading-6 mt-2">Room details for ${roomType} room.</p>
