@@ -22,7 +22,7 @@ public class Reservation {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true)
     private UserEntity user;
 
     @ManyToOne
@@ -32,4 +32,11 @@ public class Reservation {
     private Date startDate;
     private Date endDate;
     private float totalAmount;
+
+    private String guestFirstName;
+    private String guestLastName;
+    private String guestEmail;
+    private String guestPhone;
+
+
 }

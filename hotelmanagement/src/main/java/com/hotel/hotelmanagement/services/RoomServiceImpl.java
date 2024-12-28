@@ -13,6 +13,8 @@ public class RoomServiceImpl implements RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
+    
+
     @Override
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
