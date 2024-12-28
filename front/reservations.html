@@ -12,9 +12,9 @@
                     <img class="h-16" src="Hotel IZY.png">
                 </div>
                 <div class="items-center justify-between hidden gap-12 text-black md:flex">
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Home</a>
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Rooms</a>
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking</a>
+                    <a href="home.html" class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Home</a>
+                    <a href="room.html" class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Rooms</a>
+                    <a href="reservations.html" class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking</a>
                     <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Contact Us</a>
                     <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">About Us</a>
                 </div>
@@ -43,11 +43,11 @@
                 <form>
                     <div class="grid grid-cols-1 gap-6">
                         <div>
-                            <label for="nom" class="block text-sm font-semibold text-gray-700">Nom</label>
+                            <label for="nom" class="block text-sm font-semibold text-gray-700">First name</label>
                             <input id="nom" type="text" placeholder="Votre nom" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
                         </div>
                         <div>
-                            <label for="prenom" class="block text-sm font-semibold text-gray-700">Prénom</label>
+                            <label for="prenom" class="block text-sm font-semibold text-gray-700">Last name</label>
                             <input id="prenom" type="text" placeholder="Votre prénom" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
                         </div>
                         <div>
@@ -58,10 +58,23 @@
                             <label for="telephone" class="block text-sm font-semibold text-gray-700">Téléphone</label>
                             <input id="telephone" type="tel" placeholder="Votre téléphone" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
                         </div>
-                        <div>
-                            <label for="adresse" class="block text-sm font-semibold text-gray-700">Adresse</label>
-                            <textarea id="adresse" placeholder="Votre adresse" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500"></textarea>
+                        
+                        <div id="date-range-picker" date-rangepicker class="flex items-center">
+                            
+                        <div class="relative max-w-sm">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            </div>
+                            <input datepicker id="default-datepicker" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                         </div>
+  
+                            <span class="mx-4 text-gray-500">to</span>
+                            <div class="relative max-w-sm">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                </div>
+                                <input datepicker id="default-datepicker" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 " placeholder="Select date">
+                            </div>
+                        </div>
+  
                     </div>
                     <button type="submit" class="mt-6 w-full py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-700 transition duration-300 max-w-xs mx-auto block">
                         Réserver Maintenant
