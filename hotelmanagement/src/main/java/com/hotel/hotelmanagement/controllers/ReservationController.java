@@ -25,8 +25,14 @@ public class ReservationController {
 
     @PostMapping
     public Reservation createReservation(@RequestBody Reservation reservation) {
+        if (reservation.getUser() == null) {
+            
+        } else {
+            System.out.println("Reservation by registered user: " + reservation.getUser().getId());
+        }
         return reservationService.saveReservation(reservation);
     }
+
 
     @PutMapping("/{id}")
     public Reservation updateReservation(@PathVariable int id, @RequestBody Reservation reservation) {

@@ -2,6 +2,7 @@ package com.hotel.hotelmanagement.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import com.hotel.hotelmanagement.entities.Room;
@@ -10,14 +11,17 @@ import com.hotel.hotelmanagement.services.RoomService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rooms")
+@RequestMapping("/api")
 public class RoomController {
     @Autowired
     private RoomService roomService;
 
-    @GetMapping
-    public List<Room> getAllRooms() {
-        return roomService.getAllRooms();
+    @GetMapping("/rooms")
+    public Page<Room> getRooms(
+            @RequestParam(defaultValue = "0") int page,  // Default is page 0
+            @RequestParam(defaultValue = "10") int size  // Default is 10 rooms per page
+    ) {
+        return roomService.getAllRooms(page, size); // Fetch paginated rooms from the service
     }
 
     @GetMapping("/{id}")

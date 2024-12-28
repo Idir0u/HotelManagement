@@ -1,49 +1,57 @@
 package com.hotel.hotelmanagement.controllers;
-
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import com.hotel.hotelmanagement.dto.LoginRequest;
 import com.hotel.hotelmanagement.entities.UserEntity;
-import com.hotel.hotelmanagement.services.UserService;
+import com.hotel.hotelmanagement.services.UserServiceImpl;
+
+import jakarta.servlet.http.HttpSession;
+
 
 @RestController
-@RequestMapping("/users")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
+@RequestMapping("/api/users")
 public class UserController {
+
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
-    @GetMapping
-    public List<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
+    @PostMapping("/signup")
+    public String signup(@RequestBody UserEntity user) {
+        try {
+            userService.saveUser(user);
+            return "User registered successfully!";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
     }
 
-    @GetMapping("/{id}")
-    public UserEntity getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+        Optional<UserEntity> user = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
+
+        if (user.isPresent()) {
+            // Ajouter l'utilisateur à la session
+            session.setAttribute("user", user.get());
+
+            // Retourner un objet JSON avec les informations utilisateur
+            return ResponseEntity.ok(user.get());
+        } else {
+            // Retourner une erreur avec un message JSON
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Invalid email or password"));
+        }
     }
 
-    @PostMapping
-    public UserEntity createUser(@RequestBody UserEntity user) {
-        return userService.saveUser(user);
-    }
-
-    @PutMapping("/{id}")
-    public UserEntity updateUser(@PathVariable int id, @RequestBody UserEntity user) {
-        user.setId(id);
-        return userService.saveUser(user);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "Logged out successfully!";
     }
 }
