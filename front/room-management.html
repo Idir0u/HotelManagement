@@ -28,14 +28,16 @@
             </button>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-lg">
-            <table class="striped">
+            <p class="text-lg font-bold text-blue-700 mb-4">Click on the column headers to sort the table.</p>
+            <table class="striped" id="roomTable">
                 <thead>
                     <tr>
-                        <th>Room ID</th>
-                        <th>Type</th>
-                        <th>Capacity</th>
-                        <th>Price</th>
-                        <th>Status</th>
+                        <th onclick="sortTable(0)">Room ID</th>
+                        <th onclick="sortTable(1)">Type</th>
+                        <th onclick="sortTable(2)">Capacity</th>
+                        <th onclick="sortTable(3)">Price</th>
+                        <th onclick="sortTable(4)">Description</th>
+                        <th onclick="sortTable(5)">Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -45,15 +47,16 @@
                         <td>Single</td>
                         <td>1</td>
                         <td>$80</td>
+                        <td class="description">Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.</td>
                         <td>Available</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(1)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(1)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(1)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
@@ -63,15 +66,16 @@
                         <td>Double</td>
                         <td>2</td>
                         <td>$120</td>
+                        <td class="description">Spacious room for two guests with a comfortable double bed and modern amenities.</td>
                         <td>Occupied</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(2)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(2)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(2)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
@@ -81,15 +85,16 @@
                         <td>Suite</td>
                         <td>4</td>
                         <td>$250</td>
+                        <td class="description">Luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.</td>
                         <td>Available</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(3)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(3)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(3)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
@@ -99,20 +104,96 @@
                         <td>Family</td>
                         <td>5</td>
                         <td>$300</td>
+                        <td class="description">Ideal for families with children, offering multiple beds and a spacious living area.</td>
                         <td>Occupied</td>
                         <td>
-                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(4)">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(4)">
                                 <i class="material-icons">delete</i>
                             </button>
-                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(this.closest('tr').children[0].textContent)">
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(4)">
                                 <i class="material-icons">visibility</i>
                             </button>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td>5</td>
+                        <td>Single</td>
+                        <td>1</td>
+                        <td>$85</td>
+                        <td class="description">A cozy single room with modern amenities and a comfortable bed.</td>
+                        <td>Available</td>
+                        <td>
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(5)">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(5)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(5)">
+                                <i class="material-icons">visibility</i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Double</td>
+                        <td>2</td>
+                        <td>$130</td>
+                        <td class="description">A spacious double room with a comfortable bed and modern amenities.</td>
+                        <td>Available</td>
+                        <td>
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(6)">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(6)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(6)">
+                                <i class="material-icons">visibility</i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Suite</td>
+                        <td>4</td>
+                        <td>$260</td>
+                        <td class="description">A luxurious suite with a king-size bed, living area, and a spacious bathroom.</td>
+                        <td>Available</td>
+                        <td>
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(7)">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(7)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(7)">
+                                <i class="material-icons">visibility</i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Family</td>
+                        <td>5</td>
+                        <td>$320</td>
+                        <td class="description">A family room with multiple beds and a spacious living area.</td>
+                        <td>Occupied</td>
+                        <td>
+                            <button class="btn waves-effect waves-light blue modal-trigger" data-target="editRoomModal" onclick="editRoom(8)">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button class="btn waves-effect waves-light red" onclick="confirmDelete(8)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                            <button class="btn waves-effect waves-light green modal-trigger" data-target="viewRoomModal" onclick="viewRoom(8)">
+                                <i class="material-icons">visibility</i>
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -134,6 +215,10 @@
                 <div class="input-field">
                     <input id="price" type="number" class="validate">
                     <label for="price">Price</label>
+                </div>
+                <div class="input-field">
+                    <textarea id="description" class="materialize-textarea"></textarea>
+                    <label for="description">Description</label>
                 </div>
                 <div class="input-field">
                     <select id="status">
@@ -167,6 +252,10 @@
                 <div class="input-field">
                     <input id="editPrice" type="number" class="validate">
                     <label for="editPrice">Price</label>
+                </div>
+                <div class="input-field">
+                    <textarea id="editDescription" class="materialize-textarea"></textarea>
+                    <label for="editDescription">Description</label>
                 </div>
                 <div class="input-field">
                     <select id="editStatus">
@@ -214,7 +303,36 @@
 
             var selectElems = document.querySelectorAll('select');
             var selectInstances = M.FormSelect.init(selectElems);
+
+            // Truncate descriptions in the table
+            var descriptions = document.querySelectorAll('.description');
+            descriptions.forEach(function(description) {
+                if (description.textContent.length > 50) {
+                    description.textContent = description.textContent.substring(0, 50) + '...';
+                }
+            });
         });
+
+        function sortTable(columnIndex) {
+            var table = document.getElementById("roomTable");
+            var rows = Array.from(table.rows).slice(1);
+            var isAscending = table.getAttribute("data-sort-asc") === "true";
+            rows.sort(function(a, b) {
+                var cellA = a.cells[columnIndex].innerText.toLowerCase();
+                var cellB = b.cells[columnIndex].innerText.toLowerCase();
+                if (!isNaN(cellA) && !isNaN(cellB)) {
+                    cellA = parseFloat(cellA.replace('$', ''));
+                    cellB = parseFloat(cellB.replace('$', ''));
+                }
+                if (cellA < cellB) return isAscending ? -1 : 1;
+                if (cellA > cellB) return isAscending ? 1 : -1;
+                return 0;
+            });
+            rows.forEach(function(row) {
+                table.tBodies[0].appendChild(row);
+            });
+            table.setAttribute("data-sort-asc", !isAscending);
+        }
 
         function editRoom(roomID) {
             // Populate the edit form with the room details
@@ -222,11 +340,13 @@
             var roomType = row.children[1].textContent;
             var capacity = row.children[2].textContent;
             var price = row.children[3].textContent.replace('$', '');
-            var status = row.children[4].textContent;
+            var description = row.children[4].textContent;
+            var status = row.children[5].textContent;
 
             document.getElementById('editRoomType').value = roomType;
             document.getElementById('editCapacity').value = capacity;
             document.getElementById('editPrice').value = price;
+            document.getElementById('editDescription').value = description;
             document.getElementById('editStatus').value = status;
 
             M.updateTextFields();
@@ -252,7 +372,8 @@
             var roomType = row.children[1].textContent;
             var capacity = row.children[2].textContent;
             var price = row.children[3].textContent;
-            var status = row.children[4].textContent;
+            var description = row.children[4].textContent;
+            var status = row.children[5].textContent;
 
             var imageSrc;
             switch (roomType.toLowerCase()) {
@@ -268,19 +389,16 @@
                 case 'family':
                     imageSrc = 'family-room.jpg';
                     break;
-                case 'twin':
-                imageSrc = 'twin-room.jpg';
-                break;
                 default:
                     imageSrc = 'default-room.jpg';
             }
 
             var roomDetails = `
                 <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
-                    <img src="${imageSrc}" alt="${roomType}" class="w-full h-64 object-cover">
+                    <img src="${imageSrc}" alt="${roomType} Room" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-dark-grey-900">${roomType} Room</h3>
-                        <p class="text-grey-700 text-base leading-6 mt-2">Room details for ${roomType} room.</p>
+                        <p class="text-grey-700 text-base leading-6 mt-2">${description}</p>
                         <ul class="mt-4 text-sm text-grey-800">
                             <li><img src="icons8-account-50.png" alt="Capacity Icon" class="inline w-4 h-4 mr-2"> ${capacity} Guests</li>
                             <li><img src="icons8-size-50.png" alt="Size Icon" class="inline w-4 h-4 mr-2"> 20m<sup>2</sup></li>
