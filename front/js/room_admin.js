@@ -36,6 +36,20 @@ function fetchRooms() {
             updatePagination(data.totalPages, page);
         })
         .catch(error => {
+            rooms = [
+                { id: 1, type: 'Single', capacity: 1, price: 80, description: 'Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.', status: 'Available' },
+                { id: 2, type: 'Double', capacity: 2, price: 120, description: 'Spacious room for two guests with a comfortable double bed and modern amenities.', status: 'Occupied' },
+                { id: 3, type: 'Suite', capacity: 4, price: 250, description: 'Luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
+                { id: 4, type: 'Family', capacity: 5, price: 300, description: 'Ideal for families with children, offering multiple beds and a spacious living area.', status: 'Occupied' },
+                { id: 5, type: 'Single', capacity: 1, price: 85, description: 'A cozy single room with modern amenities and a comfortable bed.', status: 'Available' },
+                { id: 6, type: 'Double', capacity: 2, price: 130, description: 'A spacious double room with a comfortable bed and modern amenities.', status: 'Available' },
+                { id: 7, type: 'Suite', capacity: 4, price: 260, description: 'A luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
+                { id: 8, type: 'Family', capacity: 5, price: 320, description: 'A family room with multiple beds and a spacious living area, perfect for families with children.', status: 'Occupied' },
+                { id: 9, type: 'Single', capacity: 1, price: 90, description: 'A cozy single room with modern amenities and a comfortable bed.', status: 'Available' },
+                { id: 10, type: 'Double', capacity: 2, price: 140, description: 'A spacious double room with a comfortable bed and modern amenities.', status: 'Available' },
+                { id: 11, type: 'Suite', capacity: 4, price: 270, description: 'A luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
+                { id: 12, type: 'Family', capacity: 5, price: 330, description: 'A family room with multiple beds and a spacious living area, perfect for families with children.' },
+            ];
             console.error('Error:', error);
             showErrorPopup('Failed to fetch rooms. Please try again later.');
         });
@@ -120,20 +134,7 @@ function deleteRoomApi(roomID) {
 }
 
 
-rooms = [
-        { id: 1, type: 'Single', capacity: 1, price: 80, description: 'Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.', status: 'Available' },
-        { id: 2, type: 'Double', capacity: 2, price: 120, description: 'Spacious room for two guests with a comfortable double bed and modern amenities.', status: 'Occupied' },
-        { id: 3, type: 'Suite', capacity: 4, price: 250, description: 'Luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
-        { id: 4, type: 'Family', capacity: 5, price: 300, description: 'Ideal for families with children, offering multiple beds and a spacious living area.', status: 'Occupied' },
-        { id: 5, type: 'Single', capacity: 1, price: 85, description: 'A cozy single room with modern amenities and a comfortable bed.', status: 'Available' },
-        { id: 6, type: 'Double', capacity: 2, price: 130, description: 'A spacious double room with a comfortable bed and modern amenities.', status: 'Available' },
-        { id: 7, type: 'Suite', capacity: 4, price: 260, description: 'A luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
-        { id: 8, type: 'Family', capacity: 5, price: 320, description: 'A family room with multiple beds and a spacious living area, perfect for families with children.', status: 'Occupied' },
-        { id: 9, type: 'Single', capacity: 1, price: 90, description: 'A cozy single room with modern amenities and a comfortable bed.', status: 'Available' },
-        { id: 10, type: 'Double', capacity: 2, price: 140, description: 'A spacious double room with a comfortable bed and modern amenities.', status: 'Available' },
-        { id: 11, type: 'Suite', capacity: 4, price: 270, description: 'A luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
-        { id: 12, type: 'Family', capacity: 5, price: 330, description: 'A family room with multiple beds and a spacious living area, perfect for families with children.' },
-    ];
+
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
