@@ -24,10 +24,10 @@
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-900">Room Management</h1>
             <div>
-                <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="addRoomModal">
+                <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="addRoomModal" id="addRoomButton">
                     <i class="material-icons left">add</i>Add Room
                 </button>
-                <button class="btn waves-effect waves-light blue" onclick="fetchRooms()">
+                <button class="btn waves-effect waves-light blue" id="refreshTableButton">
                     <i class="material-icons left">refresh</i>Refresh Table
                 </button>
             </div>
@@ -39,12 +39,12 @@
             <table class="striped" id="roomTable">
                 <thead>
                     <tr>
-                        <th onclick="sortTable(0)">Room ID</th>
-                        <th onclick="sortTable(1)">Type</th>
-                        <th onclick="sortTable(2)">Capacity</th>
-                        <th onclick="sortTable(3)">Price</th>
-                        <th onclick="sortTable(4)">Description</th>
-                        <th onclick="sortTable(5)">Status</th>
+                        <th data-column="0">Room ID</th>
+                        <th data-column="1">Type</th>
+                        <th data-column="2">Capacity</th>
+                        <th data-column="3">Price</th>
+                        <th data-column="4">Description</th>
+                        <th data-column="5">Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -54,10 +54,10 @@
             </table>
             <div class="pagination-container">
                 <ul class="pagination">
-                    <li class="disabled"><a href="#!" onclick="prevPage()"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active"><a href="#!" onclick="goToPage(1)">1</a></li>
+                    <li class="disabled"><a href="#!" id="prevPageButton"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a href="#!" id="page1Button">1</a></li>
                     <!-- More page numbers will be dynamically generated here -->
-                    <li class="waves-effect"><a href="#!" onclick="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+                    <li class="waves-effect"><a href="#!" id="nextPageButton"><i class="material-icons">chevron_right</i></a></li>
                 </ul>
             </div>
         </div>
