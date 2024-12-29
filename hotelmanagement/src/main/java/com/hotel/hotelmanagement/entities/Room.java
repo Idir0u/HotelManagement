@@ -24,9 +24,9 @@ public class Room {
     private String description;
     private String type;
     private boolean isOccupied;
-    private float adultPrice;
-    private float childPrice;
+    private float price;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reservation> reservations;
+    
 } 

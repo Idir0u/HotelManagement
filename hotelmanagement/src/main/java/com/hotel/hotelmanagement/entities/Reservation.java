@@ -30,6 +30,8 @@ public class Reservation {
     private Room room;
 
     private Date startDate;
+
     private Date endDate;
+    
     private float totalAmount;
 }
