@@ -33,15 +33,55 @@ const roomImages = {
 // Fetch rooms based on the current page
 async function fetchRooms(page) {
   try {
-    console.log(`Fetching rooms for page: ${page}`); // Debugging line
-    const response = await fetch(`http://localhost:8081/api/rooms?page=${page}&size=${pageSize}`);
+    const { priceMin, priceMax, type, capacity } = getFilterValues();
+    let url = `http://localhost:8081/api/rooms?page=${page}&size=${pageSize}`;
+
+    // Add filters to the URL only if they are set
+    if (priceMin !== null) {
+      url += `&priceMin=${priceMin}`;
+    }
+    if (priceMax !== null) {
+      url += `&priceMax=${priceMax}`;
+    }
+    if (type) {
+      url += `&type=${type}`;
+    }
+    if (capacity) {
+      url += `&capacity=${capacity}`;
+    }
+
+    console.log(`Fetching rooms with URL: ${url}`); // Check the URL
+    const response = await fetch(url);
     const data = await response.json();
-    console.log('Fetched data:', data); // Debugging line
+    console.log('Fetched data:', data); // Check the data returned from the backend
     renderRooms(data.content);
     updatePagination(data);
   } catch (error) {
     console.error('Error fetching rooms:', error);
   }
+}
+
+// Get filter values from the filter form
+function getFilterValues() {
+  const price = document.getElementById("price").value;
+  const type = document.getElementById("type").value;
+  const capacity = document.getElementById("capacity").value;
+
+  // Initialize priceMin and priceMax
+  let priceMin = null;
+  let priceMax = null;
+
+  // Set priceMin and priceMax based on selected price filter
+  if (price === "Less than 200€/night") {
+    priceMax = 200;
+  } else if (price === "200€ - 500€/night") {
+    priceMin = 200;
+    priceMax = 500;
+  } else if (price === "Plus 500€/night") {
+    priceMin = 500;
+  }
+
+  return { priceMin, priceMax, type, capacity };
 }
 
 // Render the room cards on the page
@@ -117,6 +157,12 @@ if (nextButton) {
     fetchRooms(currentPage); // Fetch rooms for the next page
   });
 }
+
+// Search button listener
+document.getElementById("Search").addEventListener("click", function () {
+  currentPage = 0; // Reset to the first page when a new search is made
+  fetchRooms(currentPage); // Fetch rooms based on the selected filters
+});
 
 // Initial fetch
 fetchRooms(currentPage);
