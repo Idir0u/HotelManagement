@@ -23,9 +23,14 @@
         </div>
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-900">Room Management</h1>
-            <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="addRoomModal">
-                <i class="material-icons left">add</i>Add Room
-            </button>
+            <div>
+                <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="addRoomModal">
+                    <i class="material-icons left">add</i>Add Room
+                </button>
+                <button class="btn waves-effect waves-light blue" onclick="fetchRooms()">
+                    <i class="material-icons left">refresh</i>Refresh Table
+                </button>
+            </div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-lg">
             <div class="mb-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
@@ -47,6 +52,14 @@
                     <!-- Rows will be dynamically generated here -->
                 </tbody>
             </table>
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!" onclick="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a href="#!" onclick="goToPage(1)">1</a></li>
+                    <!-- More page numbers will be dynamically generated here -->
+                    <li class="waves-effect"><a href="#!" onclick="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -148,37 +161,82 @@
     </div>
 
     <script>
-        /*
+        
         let rooms = [];
-        fetch('http://localhost:8081/rooms')
-            .then(response => response.json())
-            .then(data => {
-                rooms = data;
-                populateTable();
-                truncateDescriptions();
-            });
-        ---------------------------
-        continue with other crud operations:
-        ---------------------
-        add room: POST
-        function addRoom(room) {
-            fetch('http://localhost:8081/rooms', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(room)
-            })
+        let currentPage = 1;
+        const rowsPerPage = 10;
+        
+        function showErrorPopup(message) {
+            const errorPopup = document.createElement('div');
+            errorPopup.className = 'error-popup';
+            errorPopup.innerHTML = `
+                <div class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50 bg-red-500 text-white p-4 rounded-lg shadow-lg w-1/3">
+                    <div class="flex justify-between items-center">
+                        <p>${message}</p>
+                        <span class="error-popup-close cursor-pointer text-xl">&times;</span>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(errorPopup);
+
+            const closeBtn = errorPopup.querySelector('.error-popup-close');
+            closeBtn.onclick = function() {
+                document.body.removeChild(errorPopup);
+            };
+
+            setTimeout(() => {
+                if (document.body.contains(errorPopup)) {
+                    document.body.removeChild(errorPopup);
+                }
+            }, 5000);
+        }
+
+        function fetchRooms() {
+            fetch(`http://localhost:8081/rooms?page=${page - 1}&size=${rowsPerPage}`)
                 .then(response => response.json())
                 .then(data => {
-                    rooms.push(data);
+                    rooms = data.content;
                     populateTable();
-                    truncateDescriptions();
+                    updatePagination(data.totalPages, page);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showErrorPopup('Failed to fetch rooms. Please try again later.');
                 });
         }
-        ---------------------
-        edit room: PUT
-        function editRoom(roomID, updatedRoom) {
+
+        function addRoomApi(room) {
+            console.log("new room", room);
+            fetch('http://localhost:8081/rooms', 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(room)
+                }
+            )
+            .then(response => {
+                console.log("response", response);
+                if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(error.message);
+                });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("data", data);
+                rooms.push(data);
+                populateTable();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showErrorPopup('Failed to add room: ' + error.message);
+            });
+        }
+
+        function editRoomApi(roomID, updatedRoom) {
             fetch(`http://localhost:8081/rooms/${roomID}`, {
                 method: 'PUT',
                 headers: {
@@ -186,28 +244,47 @@
                 },
                 body: JSON.stringify(updatedRoom)
             })
-                .then(response => response.json())
-                .then(data => {
-                    const index = rooms.findIndex(room => room.id === roomID);
-                    rooms[index] = data;
-                    populateTable();
-                    truncateDescriptions();
+            .then(response => {
+                if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(error.message);
                 });
+                }
+                return response.json();
+            })
+            .then(data => {
+                const index = rooms.findIndex(room => room.id === roomID);
+                rooms[index] = data;
+                populateTable();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showErrorPopup('Failed to edit room: ' + error.message);
+            });
         }
-        ---------------------
-        delete room: DELETE
-        function deleteRoom(roomID) {
+
+        function deleteRoomApi(roomID) {
             fetch(`http://localhost:8081/rooms/${roomID}`, {
                 method: 'DELETE'
             })
-                .then(response => {
-                    rooms = rooms.filter(room => room.id !== roomID);
-                    populateTable();
-                    truncateDescriptions();
+            .then(response => {
+                if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(error.message);
                 });
+                }
+                let row = document.getElementById('roomTableBody').querySelector(`tr td:first-child:contains(${roomID})`).parentNode;
+                document.getElementById('roomTableBody').removeChild(row);
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showErrorPopup('Failed to delete room: ' + error.message);
+            });
         }
-        */
-        const rooms = [
+        
+        
+        rooms = [
                 { id: 1, type: 'Single', capacity: 1, price: 80, description: 'Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.', status: 'Available' },
                 { id: 2, type: 'Double', capacity: 2, price: 120, description: 'Spacious room for two guests with a comfortable double bed and modern amenities.', status: 'Occupied' },
                 { id: 3, type: 'Suite', capacity: 4, price: 250, description: 'Luxurious suite with premium amenities, including a king-size bed, living area, and a spacious bathroom.', status: 'Available' },
@@ -229,11 +306,12 @@
             var selectElems = document.querySelectorAll('select');
             var selectInstances = M.FormSelect.init(selectElems);
 
+            //fetching rooms
+            fetchRooms();
+
             // Populate the table with initial data
             populateTable();
-
-            // Truncate descriptions in the table after loading
-            truncateDescriptions();
+            
         });
 
         function populateTable() {
@@ -264,6 +342,7 @@
                 `;
                 tableBody.appendChild(row);
             });
+            truncateDescriptions();
         }
 
         function truncateDescriptions() {
@@ -296,20 +375,73 @@
             table.setAttribute("data-sort-asc", !isAscending);
         }
 
-        function editRoom(roomID) {
-            // Populate the edit form with the room details
-            var row = document.querySelector(`tr td:first-child:contains(${roomID})`).parentElement;
-            var roomType = row.children[1].textContent;
-            var capacity = row.children[2].textContent;
-            var price = row.children[3].textContent.replace('$', '');
-            var description = row.children[4].textContent;
-            var status = row.children[5].textContent;
+        function updatePagination(totalPages, currentPage) {
+            const paginationContainer = document.querySelector('.pagination');
+            paginationContainer.innerHTML = `
+                <li class="${currentPage === 1 ? 'disabled' : 'waves-effect'}"><a href="#!" onclick="prevPage()"><i class="material-icons">chevron_left</i></a></li>
+            `;
 
-            document.getElementById('editRoomType').value = roomType;
-            document.getElementById('editCapacity').value = capacity;
-            document.getElementById('editPrice').value = price;
-            document.getElementById('editDescription').value = description;
-            document.getElementById('editStatus').value = status;
+            for (let i = 1; i <= totalPages; i++) {
+                paginationContainer.innerHTML += `
+                    <li class="${i === currentPage ? 'active' : 'waves-effect'}"><a href="#!" onclick="goToPage(${i})">${i}</a></li>
+                `;
+            }
+
+            paginationContainer.innerHTML += `
+                <li class="${currentPage === totalPages ? 'disabled' : 'waves-effect'}"><a href="#!" onclick="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+            `;
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                fetchRooms(currentPage);
+            }
+        }
+
+        function nextPage() {
+            currentPage++;
+            fetchRooms(currentPage);
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            fetchRooms(currentPage);
+        }
+
+        function addRoom() {
+            console.log("add room");
+            document.getElementById('addRoomForm').onsubmit = function(event) {
+                event.preventDefault();
+                var newRoom = {
+                    type: document.getElementById('roomType').value,
+                    capacity: document.getElementById('capacity').value,
+                    price: document.getElementById('price').value,
+                    description: document.getElementById('description').value,
+                    status: document.getElementById('status').value
+                };
+                addRoomApi(newRoom);
+                console.log("new room", newRoom);
+                M.Modal.getInstance(document.getElementById('addRoomModal')).close();
+            };
+            M.updateTextFields();
+            M.FormSelect.init(document.querySelectorAll('select'));
+        }
+
+        function editRoom(roomID) {
+            
+            document.getElementById('editRoomForm').onsubmit = function(event) {
+                event.preventDefault();
+                var updatedRoom = {
+                    type: document.getElementById('editRoomType').value,
+                    capacity: document.getElementById('editCapacity').value,
+                    price: document.getElementById('editPrice').value,
+                    description: document.getElementById('editDescription').value,
+                    status: document.getElementById('editStatus').value
+                };
+            editRoomApi(roomID, updatedRoom);
+            M.Modal.getInstance(document.getElementById('editRoomModal')).close();
+            };
 
             M.updateTextFields();
             M.FormSelect.init(document.querySelectorAll('select'));
@@ -318,15 +450,10 @@
         function confirmDelete(roomID) {
             var deleteButton = document.getElementById('confirmDeleteButton');
             deleteButton.onclick = function() {
-                deleteRoom(roomID);
+                deleteRoomApi(roomID);
                 M.Modal.getInstance(document.getElementById('deleteConfirmationModal')).close();
             };
             M.Modal.getInstance(document.getElementById('deleteConfirmationModal')).open();
-        }
-
-        function deleteRoom(roomID) {
-            var row = document.querySelector(`tr td:first-child:contains(${roomID})`).parentElement;
-            row.remove();
         }
 
         function viewRoom(roomID) {
