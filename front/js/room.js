@@ -86,15 +86,16 @@ function getFilterValues() {
 
 // Render the room cards on the page
 function renderRooms(rooms) {
-  const container = document.getElementById('room-cards-container');
-  container.innerHTML = ''; // Clear previous cards
-
-  rooms.forEach(room => {
-    // Randomly select an image from the respective room type
-    const randomImage = getRandomImage(room.type);
-
-    const card = `
-      <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full flex">
+    const container = document.getElementById('room-cards-container');
+    container.innerHTML = ''; // Clear previous cards
+  
+    rooms.forEach(room => {
+      // Randomly select an image from the respective room type
+      const randomImage = getRandomImage(room.type);
+  
+      const card = document.createElement('div');
+      card.className = "bg-white rounded-lg shadow-lg max-w-2xl w-full flex";
+      card.innerHTML = `
         <img class="w-1/3 rounded-l-lg object-cover" src="${randomImage}" alt="${room.type} Image">
         <div class="p-4 flex flex-col justify-between w-2/3">
           <h2 class="text-lg font-semibold mb-3">${room.type} N°${room.id}</h2>
@@ -106,14 +107,38 @@ function renderRooms(rooms) {
           <p class="text-gray-600 text-sm mb-4">${room.description}</p>
           <div class="flex items-center justify-between">
             <p class="text-base font-bold">$${room.price} per night</p>
-            <button class="px-4 py-2 bg-black text-white text-sm rounded hover:bg-gray-800">Book Now</button>
+            <button class="book-now-btn px-4 py-2 bg-black text-white text-sm rounded hover:bg-gray-800" 
+                    data-id="${room.id}" 
+                    data-price="${room.price}" 
+                    data-capacity="${room.capacity}">
+              Book Now
+            </button>
           </div>
         </div>
-      </div>
-    `;
-    container.innerHTML += card;
-  });
-}
+      `;
+  
+      container.appendChild(card);
+    });
+  
+    // Add event listeners to all "Book Now" buttons
+    const bookNowButtons = container.querySelectorAll('.book-now-btn');
+    bookNowButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        const roomId = this.getAttribute('data-id');
+        const price = parseFloat(this.getAttribute('data-price'));
+        const capacity = parseInt(this.getAttribute('data-capacity'), 10);
+  
+        // Store in localStorage
+        localStorage.setItem('roomId', roomId);
+        localStorage.setItem('price', price);
+  
+        // Redirect to reservations.html
+        window.location.href = 'reservations.html';
+      });
+    });
+  }
+  
+  
 
 // Function to randomly pick an image for a given room type
 function getRandomImage(roomType) {
