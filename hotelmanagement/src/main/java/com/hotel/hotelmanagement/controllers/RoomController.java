@@ -37,23 +37,23 @@ public class RoomController {
     }
     
 
-    @GetMapping("/{id}")
+    @GetMapping("/room/{id}")
     public Room getRoomById(@PathVariable int id) {
         return roomService.getRoomById(id);
     }
 
-    @PostMapping
+    @PostMapping("/room")
     public Room createRoom(@RequestBody Room room) {
         return roomService.saveRoom(room);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/room/{id}")
     public Room updateRoom(@PathVariable int id, @RequestBody Room room) {
         room.setId(id);
         return roomService.saveRoom(room);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/room/{id}")
     public void deleteRoom(@PathVariable int id) {
         roomService.deleteRoom(id);
     }
