@@ -1,0 +1,9 @@
+# Ignore class files
+*.class
+
+# Ignore properties files
+*.properties
+
+# Ignore other executables
+*.exe
+*.dll
