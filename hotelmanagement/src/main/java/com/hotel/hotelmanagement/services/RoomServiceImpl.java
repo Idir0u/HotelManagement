@@ -16,7 +16,10 @@ public class RoomServiceImpl implements RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
-    
+    @Override
+    public Page<Room> getAllRooms(Pageable pageable) {
+        return roomRepository.findAll(pageable);
+    }
 
     public Page<Room> getRooms(Integer priceMin, Integer priceMax, String type, Integer capacity, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
