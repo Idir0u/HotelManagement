@@ -17,11 +17,13 @@ public class RoomController {
     private RoomService roomService;
 
     @GetMapping("/rooms")
-    public Page<Room> getRooms(
-            @RequestParam(defaultValue = "0") int page,  // Default is page 0
-            @RequestParam(defaultValue = "10") int size  // Default is 10 rooms per page
-    ) {
-        return roomService.getAllRooms(page, size); // Fetch paginated rooms from the service
+    public Page<Room> getRooms(@RequestParam(value = "priceMin", required = false) Integer priceMin,
+                               @RequestParam(value = "priceMax", required = false) Integer priceMax,
+                               @RequestParam(value = "type", required = false) String type,
+                               @RequestParam(value = "capacity", required = false) Integer capacity,
+                               @RequestParam(value = "page", defaultValue = "0") int page,
+                               @RequestParam(value = "size", defaultValue = "10") int size) {
+        return roomService.getRooms(priceMin, priceMax, type, capacity, page, size);
     }
 
     @GetMapping("/{id}")

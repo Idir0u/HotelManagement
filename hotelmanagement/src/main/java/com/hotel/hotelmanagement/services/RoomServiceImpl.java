@@ -18,10 +18,9 @@ public class RoomServiceImpl implements RoomService {
 
     
 
-    @Override
-    public Page<Room> getAllRooms(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size); // Create a Pageable object with page and size
-        return roomRepository.findAll(pageable);
+    public Page<Room> getRooms(Integer priceMin, Integer priceMax, String type, Integer capacity, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return roomRepository.findRoomsWithFilters(priceMin, priceMax, type, capacity, pageable);
     }
 
     @Override
