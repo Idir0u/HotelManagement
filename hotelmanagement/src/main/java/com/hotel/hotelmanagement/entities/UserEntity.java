@@ -2,6 +2,10 @@ package com.hotel.hotelmanagement.entities;
 
 import jakarta.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Entity
@@ -30,6 +34,7 @@ public class UserEntity {
     }
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<Reservation> reservations;
 
 }

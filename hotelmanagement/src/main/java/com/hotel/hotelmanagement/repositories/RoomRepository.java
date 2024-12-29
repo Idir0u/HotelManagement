@@ -1,4 +1,6 @@
 package com.hotel.hotelmanagement.repositories;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +15,5 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
            "AND (:type IS NULL OR r.type = :type) " +
            "AND (:capacity IS NULL OR r.capacity = :capacity)")
     Page<Room> findRoomsWithFilters(Integer priceMin, Integer priceMax, String type, Integer capacity, Pageable pageable);
+
 }
