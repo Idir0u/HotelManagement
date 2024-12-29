@@ -20,8 +20,14 @@ public class UserEntity {
     private String email;
     private String phoneNumber;
     private String password;
-    private String address;
     private String UserRole;
+
+    @PrePersist
+    public void setDefaultRole() {
+        if (this.UserRole == null || this.UserRole.isEmpty()) {
+            this.UserRole = "client";
+        }
+    }
 
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;

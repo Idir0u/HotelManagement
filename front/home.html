@@ -8,21 +8,40 @@
         <div class="container flex flex-col px-16 bg-white">
             <div class="relative flex flex-wrap items-center justify-between w-full bg-white group py-7 shrink-0">
                 <div>
-                    <img class="h-16" src="Hotel IZY.png">
+                    <img class="h-16" src="img/Hotel IZY.png">
                 </div>
                 <div class="items-center justify-between hidden gap-12 text-black md:flex">
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Home</a>
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Rooms</a>
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking</a>
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Contact Us</a>
-                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">About Us</a>
+                    <a class="text-lg font-sans text-dark-grey-700 hover:text-dark-grey-900" href="index.html">Home</a>
+                    <a href="room.html" class="text-lg font-sans text-dark-grey-700 hover:text-dark-grey-900">Rooms</a>
+                    <a href="reservations.html" class="text-lg font-sans text-dark-grey-700 hover:text-dark-grey-900">Booking</a>
+                    <a class="text-lg font-sans text-dark-grey-700 hover:text-dark-grey-900" href="contact.html">Contact Us</a>
+                    <a class="text-lg font-sans text-dark-grey-700 hover:text-dark-grey-900" href="about.html">About Us</a>
                 </div>
                 <div class="items-center gap-8 md:flex">
-                    <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-yellow-700 text-white border border-yellow-700 hover:bg-white hover:text-yellow-700 transition duration-300">
+                    <!-- Bouton Login -->
+                    <button id="login-button" class="flex items-center px-4 py-2 text-lg font-bold rounded-xl bg-yellow-700 text-white border border-yellow-700 hover:bg-white hover:text-yellow-700 transition duration-300">
                         <a href="login.html">Login</a>
                     </button>
+            
+                    <!-- Dropdown utilisateur -->
+                    <div id="user-dropdown" style="display: none;" class="relative inline-block text-left">
+                        <button class="inline-flex justify-center w-full rounded-xl border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <span class="user-name"></span>
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <!-- Menu déroulant -->
+                        <div class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div class="py-1">
+                                <a href="#" id="logout-button" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            
         
             <div class="grid w-full grid-cols-1 my-auto mt-12 mb-8 md:grid-cols-2 xl:gap-14 md:gap-5">
                         <div class="flex flex-col justify-center col-span-1 text-center lg:text-start">
@@ -40,7 +59,7 @@
                             </div>
                         </div>
                         <div class="items-center justify-end hidden col-span-1 md:flex">
-                            <img class="w-4/5 rounded-md" src="pexels-maceiras-2467558.jpg" alt="header image">
+                            <img class="w-4/5 rounded-md" src="img/home.jpg" alt="header image">
                         </div>
                     </div>
                 </div>
@@ -50,7 +69,7 @@
                     <h2 class="mb-24 text-3xl font-extrabold leading-tight lg:text-4xl text-dark-grey-900 text-center">About Us</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:gap-14 md:gap-5">
                         <div class="items-center justify-center hidden md:flex">
-                            <img class="w-4/5 rounded-md" src="pexels-pixabay-258154.jpg" alt="About Us Image">
+                            <img class="w-4/5 rounded-md" src="img/about.jpg" alt="About Us Image">
                         </div>
                         <div class="flex flex-col justify-center col-span-1 text-center lg:text-start">
                             <p class="mb-6 text-base font-normal leading-7 text-grey-900 lg:w-3/4">
@@ -84,108 +103,105 @@
 
                     <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-4 text-center">
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-parking-100.png" alt="Parking Area" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-parking-100.png" alt="Parking Area" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">Parking Area</p>
                         </div>
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-safety-box-99.png" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-safety-box-99.png" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">Safety Box</p>
                         </div>
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-swimming-pool-100.png" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-swimming-pool-100.png" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">Swimming Pool</p>
                         </div>
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-gym-96 (1).png" alt="Gym" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-gym-96 (1).png" alt="Gym" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">Gym</p>
                         </div>
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-wi-fi-logo-100.png" alt="Free Wifi" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-wi-fi-logo-100.png" alt="Free Wifi" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">Free Wifi</p>
                         </div>
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-breakfast-96.png" alt="Breakfast" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-breakfast-96.png" alt="Breakfast" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">Breakfast</p>
                         </div>
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-restaurant-100.png" alt="Restaurant" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-restaurant-100.png" alt="Restaurant" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">Restaurant</p>
                         </div>
                         <div class="flex flex-col items-center p-4 transition duration-300 bg-white rounded-lg hover:bg-yellow-100">
-                            <img src="icons8-game-controller-100.png" alt="Restaurant" class="w-24 h-24 mb-2">
+                            <img src="img/icons8-game-controller-100.png" alt="Restaurant" class="w-24 h-24 mb-2">
                             <p class="text-base font-normal text-grey-900">gaming</p>
                         </div>
                     </div>
                 </div>
-                 <!-- Rooms Section -->
-    <div class="w-full mt-12 mb-8 px-6 md:px-16">
-        <h2 class="mb-4 text-3xl font-extrabold leading-tight lg:text-4xl text-dark-grey-900 text-center">Our Rooms</h2>
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <!-- Single Room Card -->
-            <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
-                <img src="single-room.jpg" alt="Single Room" class="w-full h-64 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-dark-grey-900">Single Room</h3>
-                    <p class="text-grey-700 text-base leading-6 mt-2">Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.</p>
-                    <ul class="mt-4 text-sm text-grey-800">
-                        <li><img src="icons8-account-50.png" alt="Capacity Icon" class="inline w-4 h-4 mr-2"> 1 Guest</li>
-                        <li><img src="icons8-size-50.png" alt="Size Icon" class="inline w-4 h-4 mr-2"> 20m<sup>2</sup></li>
-                        <li><img src="icons8-highlights-48.png" alt="Highlights Icon" class="inline w-4 h-4 mr-2"> Free WiFi, TV, Compact and Cozy</li>
-                    </ul>
-                    <div class="mt-6 flex justify-between items-center">
-                        <span class="text-lg text-grey-600">Starting from <span class="text-lg font-bold text-yellow-700">$80/night</span></span>
-                        <button class="py-2 px-4 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">Book now
+                 
+                <div class="w-full mt-12 mb-8 px-6 md:px-16">
+                    <h2 class="mb-4 text-3xl font-extrabold leading-tight lg:text-4xl text-dark-grey-900 text-center">Our Rooms</h2>
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 
-                        </button>
+                        <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
+                            <img src="img/room/single-room1.jpg" alt="Single Room" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-dark-grey-900">Single Room</h3>
+                                <p class="text-grey-700 text-base leading-6 mt-2">Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.</p>
+                                <ul class="mt-4 text-sm text-grey-800">
+                                    <li><img src="img/icons8-account-50.png" alt="Capacity Icon" class="inline w-4 h-4 mr-2"> 1 Guest</li>
+                                    <li><img src="img/icons8-highlights-48.png" alt="Highlights Icon" class="inline w-4 h-4 mr-2"> Free WiFi, TV, Compact and Cozy</li>
+                                </ul>
+                                <div class="mt-6 flex justify-between items-center">
+                                    <span class="text-lg text-grey-600">Starting from <span class="text-lg font-bold text-yellow-700">$80/night</span></span>
+                                    <button class="py-2 px-4 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">Book now
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
+                            <img src="img/room/double-room1.jpg" alt="Double Room" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-dark-grey-900">Double Room</h3>
+                                <p class="text-grey-700 text-base leading-6 mt-2">An inviting room ideal for couples who desire a relaxing and romantic stay. The room comes with a range of amenities to enhance your experience.</p>
+                                <ul class="mt-4 text-sm text-grey-800">
+                                    <li><img src="img/icons8-account-50.png" alt="Capacity Icon" class="inline w-4 h-4 mr-2"> 2 Guests</li>
+                                    <li><img src="img/icons8-highlights-48.png" alt="Highlights Icon" class="inline w-4 h-4 mr-2"> Garden View, Mini Bar, Complimentary Breakfast</li>
+                                </ul>
+                                <div class="mt-6 flex justify-between items-center">
+                                    <span class="text-lg text-grey-600">Starting from <span class="text-lg font-bold text-yellow-700">$120/night</span></span>
+                                    <button class="py-2 px-4 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">Book now
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
+                            <img src="img/room/suite-room1.jpg" alt="Suite" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-dark-grey-900">Suite</h3>
+                                <p class="text-grey-700 text-base leading-6 mt-2">An elegant and spacious suite designed to provide the ultimate luxury experience. Perfect for families or groups looking for premium comfort.</p>
+                                <ul class="mt-4 text-sm text-grey-800">
+                                    <li><img src="img/icons8-account-50.png" alt="Capacity Icon" class="inline w-4 h-4 mr-2"> 4 Guests</li>
+                                    <li><img src="img/icons8-highlights-48.png" alt="Highlights Icon" class="inline w-4 h-4 mr-2"> Sea View, Private Balcony, Access to Private Pool</li>
+                                </ul>
+                                <div class="mt-6 flex justify-between items-center">
+                                    <span class="text-lg text-grey-600">Starting from <span class="text-lg font-bold text-yellow-700">$200/night</span></span>
+                                    <button class="py-2 px-4 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">Book now
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button class="py-3 px-6 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">View More</button>
                     </div>
                 </div>
-            </div>
-            <!-- Double Room Card -->
-            <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
-                <img src="double-room.jpg" alt="Double Room" class="w-full h-64 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-dark-grey-900">Double Room</h3>
-                    <p class="text-grey-700 text-base leading-6 mt-2">An inviting room ideal for couples who desire a relaxing and romantic stay. The room comes with a range of amenities to enhance your experience.</p>
-                    <ul class="mt-4 text-sm text-grey-800">
-                        <li><img src="icons8-account-50.png" alt="Capacity Icon" class="inline w-4 h-4 mr-2"> 2 Guests</li>
-                        <li><img src="icons8-size-50.png" alt="Size Icon" class="inline w-4 h-4 mr-2"> 30m<sup>2</sup></li>
-                        <li><img src="icons8-highlights-48.png" alt="Highlights Icon" class="inline w-4 h-4 mr-2"> Garden View, Mini Bar, Complimentary Breakfast</li>
-                    </ul>
-                    <div class="mt-6 flex justify-between items-center">
-                        <span class="text-lg text-grey-600">Starting from <span class="text-lg font-bold text-yellow-700">$120/night</span></span>
-                        <button class="py-2 px-4 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">Book now
-
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Suite Card -->
-            <div class="flex flex-col bg-white shadow-lg rounded-xl overflow-hidden transition duration-300 hover:shadow-2xl">
-                <img src="suite-room.jpg" alt="Suite" class="w-full h-64 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-dark-grey-900">Suite</h3>
-                    <p class="text-grey-700 text-base leading-6 mt-2">An elegant and spacious suite designed to provide the ultimate luxury experience. Perfect for families or groups looking for premium comfort.</p>
-                    <ul class="mt-4 text-sm text-grey-800">
-                        <li><img src="icons8-account-50.png" alt="Capacity Icon" class="inline w-4 h-4 mr-2"> 4 Guests</li>
-                        <li><img src="icons8-size-50.png" alt="Size Icon" class="inline w-4 h-4 mr-2"> 50m<sup>2</sup></li>
-                        <li><img src="icons8-highlights-48.png" alt="Highlights Icon" class="inline w-4 h-4 mr-2"> Sea View, Private Balcony, Access to Private Pool</li>
-                    </ul>
-                    <div class="mt-6 flex justify-between items-center">
-                        <span class="text-lg text-grey-600">Starting from <span class="text-lg font-bold text-yellow-700">$200/night</span></span>
-                        <button class="py-2 px-4 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">Book now
-
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-8 text-center">
-            <button class="py-3 px-6 text-sm font-bold text-white bg-yellow-500 hover:bg-yellow-700 transition duration-300 rounded-lg">View More</button>
-        </div>
-    </div>
 
 
         </div>
-        
+        <script src="js/navbar.js"></script>
     </body>
 <html>
