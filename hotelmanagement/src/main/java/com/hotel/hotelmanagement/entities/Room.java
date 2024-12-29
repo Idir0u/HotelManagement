@@ -29,8 +29,7 @@ public class Room {
     private boolean isOccupied;
     private float price;
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Reservation> reservations;
-
-} 
+}

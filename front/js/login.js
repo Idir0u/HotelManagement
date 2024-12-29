@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.ok) {
                 const user = await response.json();
-                localStorage.setItem("user", JSON.stringify(user));
+                sessionStorage.setItem("user", JSON.stringify(user));  // Save to sessionStorage instead of localStorage
 
                 alert("Login successful!");
-                window.location.href = "home.html";
+                window.location.href = "home.html";  // Or wherever you'd like to redirect
             } else {
                 const error = await response.text();
                 alert("Login failed: " + error);

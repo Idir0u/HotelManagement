@@ -7,7 +7,10 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Data
 @AllArgsConstructor
@@ -23,15 +26,14 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "user_id") 
+    @JsonBackReference
     private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "room_id") 
     private Room room;
 
-    private Date startDate;
-
-    private Date endDate;
-    
+    private LocalDate startDate;
+    private LocalDate endDate;
     private float totalAmount;
 }

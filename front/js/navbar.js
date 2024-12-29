@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoutButton = document.getElementById("logout-button");
 
     // Vérifier si un utilisateur est connecté
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
+
+    
 
     if (user) {
         loginButton.style.display = "none"; // Masquer le bouton de login

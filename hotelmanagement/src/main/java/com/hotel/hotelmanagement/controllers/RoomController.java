@@ -2,11 +2,9 @@ package com.hotel.hotelmanagement.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
 import com.hotel.hotelmanagement.entities.Room;
 import com.hotel.hotelmanagement.services.RoomService;
 
@@ -18,8 +16,6 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
-    
-
     @GetMapping("/rooms")
     public Page<Room> getRooms(@RequestParam(value = "priceMin", required = false) Integer priceMin,
                                @RequestParam(value = "priceMax", required = false) Integer priceMax,
@@ -29,31 +25,24 @@ public class RoomController {
                                @RequestParam(value = "size", defaultValue = "10") int size) {
         return roomService.getRooms(priceMin, priceMax, type, capacity, page, size);
     }
-    @GetMapping("/allrooms")
-    public Page<Room> getAllRooms(@RequestParam(defaultValue = "0") int page,
-                                @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return roomService.getAllRooms(page, size);
-    }
-    
 
-    @GetMapping("/room/{id}")
+    @GetMapping("/{id}")
     public Room getRoomById(@PathVariable int id) {
         return roomService.getRoomById(id);
     }
 
-    @PostMapping("/room")
+    @PostMapping
     public Room createRoom(@RequestBody Room room) {
         return roomService.saveRoom(room);
     }
 
-    @PutMapping("/room/{id}")
+    @PutMapping("/{id}")
     public Room updateRoom(@PathVariable int id, @RequestBody Room room) {
         room.setId(id);
         return roomService.saveRoom(room);
     }
 
-    @DeleteMapping("/room/{id}")
+    @DeleteMapping("/{id}")
     public void deleteRoom(@PathVariable int id) {
         roomService.deleteRoom(id);
     }
