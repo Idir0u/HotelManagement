@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.hotel.hotelmanagement.entities.Room;
 import com.hotel.hotelmanagement.repositories.RoomRepository;
 
-import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
