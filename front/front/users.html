@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body class="bg-white">
+    <div class="container mx-auto mt-8">
+        <div class="relative flex flex-wrap items-center justify-between w-full bg-white group py-7 shrink-0">
+            <div>
+                <img class="h-16" src="Hotel IZY.png" alt="Hotel IZY">
+            </div>
+            <div class="items-center justify-between hidden gap-12 text-black md:flex">
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="home.html">Home</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="admin-dashboard.html">DashBoard</a>
+                <a class="text-sm font-normal text-dark-grey-700" href="room-management.html">Room Management</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking Management</a>
+                <a href="users.html" class="text-sm font-normal text-yellow-700 hover:text-dark-grey-900" href="">Users Management</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Contact Us</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">About Us</a>
+            </div>
+        </div>
+        
+        
+    
+        <div class="mt-16 flex flex-col justify-center items-center mx-auto">
+            <h1 class="text-3xl text-center font-bold text-gray-900 my-8">Clients List</h1>
+            <table class="mt-8 border-collapse w-full text-left">
+                <thead>
+                    <tr>
+                        <th class="border-b p-4">User ID</th>
+                        <th class="border-b p-4">Name</th>
+                        <th class="border-b p-4">Email</th>
+                        <th class="border-b p-4">Phone</th>
+                        <th class="border-b p-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- Rows dynamically generated -->
+                </tbody>
+            </table>
+            <div class="flex justify-center mt-12">
+                <!-- Previous Button -->
+                <a id="prev-btn" href="#" class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+                </svg>
+                Previous
+                </a>
+                <a id="next-btn" href="#" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                Next
+                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="js/users.js"></script>
+</body>
+</html>

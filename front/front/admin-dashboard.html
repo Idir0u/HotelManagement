@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body class="bg-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="relative flex flex-wrap items-center justify-between w-full bg-white group shrink-0">
+            <div>
+                <img class="h-16" src="Hotel IZY.png" alt="Hotel IZY">
+            </div>
+            <div class="items-center justify-between hidden gap-12 text-black md:flex">
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="home.html">Home</a>
+                <a class="text-sm font-normal text-yellow-500" href="admin-dashboard.html">DashBoard</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="room-management.html">Room Management</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking Management</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Contact Us</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">About Us</a>
+            </div>
+            <div class="items-center gap-8 md:flex">
+                <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-yellow-700 text-white border border-yellow-700 hover:bg-white hover:text-yellow-700 transition duration-300">
+                    <a href="home.html">Logout</a>
+                </button>
+            </div>
+        </div>
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 animate__animated animate__fadeInUp">
+                <h2 class="text-xl font-bold mb-4">Total Reservations</h2>
+                <p class="text-3xl font-bold text-yellow-700 counter" data-count="3654">0</p>
+                <a href="reservations.html" class="text-blue-500 hover:text-blue-700">See more &rarr;</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 animate__animated animate__fadeInUp animate__delay-1s">
+                <h2 class="text-xl font-bold mb-4">Current Reservations</h2>
+                <p class="text-3xl font-bold text-yellow-700 counter" data-count="175">0</p>
+                <a href="reservations.html" class="text-blue-500 hover:text-blue-700">See more &rarr;</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 animate__animated animate__fadeInUp animate__delay-2s">
+                <h2 class="text-xl font-bold mb-4">All Rooms</h2>
+                <p class="text-3xl font-bold text-yellow-700 counter" data-count="500">0</p>
+                <a href="room-management.html" class="text-blue-500 hover:text-blue-700">See more &rarr;</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 animate__animated animate__fadeInUp animate__delay-3s">
+                <h2 class="text-xl font-bold mb-4">Available Rooms</h2>
+                <p class="text-3xl font-bold text-yellow-700 counter" data-count="325">0</p>
+                <a href="room-management.html" class="text-blue-500 hover:text-blue-700">See more &rarr;</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 animate__animated animate__fadeInUp animate__delay-4s">
+                <h2 class="text-xl font-bold mb-4">Bookings Today</h2>
+                <p class="text-3xl font-bold text-yellow-700 counter" data-count="30">0</p>
+                <a href="reservations.html" class="text-blue-500 hover:text-blue-700">See more &rarr;</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 animate__animated animate__fadeInUp animate__delay-5s">
+                <h2 class="text-xl font-bold mb-4">Total Users</h2>
+                <p class="text-3xl font-bold text-yellow-700 counter" data-count="1500">0</p>
+                <a href="#" class="text-blue-500 hover:text-blue-700">See more &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to animate numbers
+        function animateCounter(element, start, end, duration) {
+            const startTime = performance.now();
+            function updateCounter(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const currentValue = Math.floor(progress * (end - start) + start);
+                element.textContent = currentValue;
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Initialize counters when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            const counters = document.querySelectorAll('.counter'); // Select all elements with the 'counter' class
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'), 10); // Get the target value
+                let duration;
+                if (target < 100) {
+                    duration = 6000;
+                } else if (target <= 500) {
+                    duration = 4000;
+                } else if (target < 1000) {
+                    duration = 2500;
+                } else if (target <= 1500) {
+                    duration = 6000;
+                } else {
+                    duration = 2000;
+                }
+                animateCounter(counter, 0, target, duration); // Animate from 0 to target
+            });
+        });
+    </script>
+</body>
+</html>

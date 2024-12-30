@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body class="bg-white">
+    <div class="container flex flex-col px-16 bg-white">
+        <div class="relative flex flex-wrap items-center justify-between w-full bg-white group py-7 shrink-0">
+            <div>
+                <img class="h-16" src="Hotel IZY.png" alt="Hotel IZY">
+            </div>
+            <div class="items-center justify-between hidden gap-12 text-black md:flex">
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="home.html">Home</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="admin-dashboard.html">DashBoard</a>
+                <a class="text-sm font-normal text-yellow-500" href="room-management.html">Room Management</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking Management</a>
+                <a href="users.html" class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Users Management</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Contact Us</a>
+                <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">About Us</a>
+            </div>
+        </div>
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Room Management</h1>
+            <div>
+                <button class="btn waves-effect waves-light yellow darken-2 modal-trigger" data-target="addRoomModal" id="addRoomButton">
+                    <i class="material-icons left">add</i>Add Room
+                </button>
+                <button class="btn waves-effect waves-light blue" id="refreshTableButton">
+                    <i class="material-icons left">refresh</i>Refresh Table
+                </button>
+            </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="mb-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+                <p><strong>Note:</strong> Click on the column headers to sort the table.</p>
+            </div>
+            <table class="striped" id="roomTable">
+                <thead>
+                    <tr>
+                        <th data-column="0">Room ID</th>
+                        <th data-column="1">Type</th>
+                        <th data-column="2">Capacity</th>
+                        <th data-column="3">Price</th>
+                        <th data-column="4">Description</th>
+                        <th data-column="5">Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="roomTableBody">
+                    <!-- Rows will be dynamically generated here -->
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!" id="prevPageButton"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a href="#!" id="page1Button">1</a></li>
+                    <!-- More page numbers will be dynamically generated here -->
+                    <li class="waves-effect"><a href="#!" id="nextPageButton"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Room Modal -->
+    <div id="addRoomModal" class="modal">
+        <div class="modal-content">
+            <h4>Add Room</h4>
+            <form id="addRoomForm">
+                <div class="input-field">
+                    <input id="roomType" type="text" class="validate">
+                    <label for="roomType">Room Type</label>
+                </div>
+                <div class="input-field">
+                    <input id="capacity" type="number" class="validate">
+                    <label for="capacity">Capacity</label>
+                </div>
+                <div class="input-field">
+                    <input id="price" type="number" class="validate">
+                    <label for="price">Price</label>
+                </div>
+                <div class="input-field">
+                    <textarea id="description" class="materialize-textarea"></textarea>
+                    <label for="description">Description</label>
+                </div>
+                <div class="input-field">
+                    <select id="status">
+                        <option value="" disabled selected>Choose status</option>
+                        <option value="Available">Available</option>
+                        <option value="Occupied">Occupied</option>
+                    </select>
+                    <label for="status">Status</label>
+                </div>
+                <button class="btn waves-effect waves-light yellow darken-2" type="submit">Add Room</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-close btn waves-effect waves-light red">Close</button>
+        </div>
+    </div>
+
+    <!-- Edit Room Modal -->
+    <div id="editRoomModal" class="modal">
+        <div class="modal-content">
+            <h4>Edit Room</h4>
+            <form id="editRoomForm">
+                <div class="input-field">
+                    <input id="editRoomType" type="text" class="validate">
+                    <label for="editRoomType">Room Type</label>
+                </div>
+                <div class="input-field">
+                    <input id="editCapacity" type="number" class="validate">
+                    <label for="editCapacity">Capacity</label>
+                </div>
+                <div class="input-field">
+                    <input id="editPrice" type="number" class="validate">
+                    <label for="editPrice">Price</label>
+                </div>
+                <div class="input-field">
+                    <textarea id="editDescription" class="materialize-textarea"></textarea>
+                    <label for="editDescription">Description</label>
+                </div>
+                <div class="input-field">
+                    <select id="editStatus">
+                        <option value="" disabled selected>Choose status</option>
+                        <option value="Available">Available</option>
+                        <option value="Occupied">Occupied</option>
+                    </select>
+                    <label for="editStatus">Status</label>
+                </div>
+                <button class="btn waves-effect waves-light yellow darken-2" type="submit">Save Changes</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-close btn waves-effect waves-light red">Close</button>
+        </div>
+    </div>
+
+    <!-- View Room Modal -->
+    <div id="viewRoomModal" class="modal">
+        <div class="modal-content">
+            <h4>Room Details</h4>
+            <div id="roomDetails"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-close btn waves-effect waves-light red">Close</button>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmationModal" class="modal">
+        <div class="modal-content">
+            <h4>Confirm Delete</h4>
+            <p>Are you sure you want to delete this room?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn waves-effect waves-light red" id="confirmDeleteButton">Delete</button>
+            <button class="modal-close btn waves-effect waves-light grey">Cancel</button>
+        </div>
+    </div>
+
+    <script src="js/room_admin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

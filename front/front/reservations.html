@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-white">
+        <!-- Barre de navigation principale -->
+        <div class="container flex flex-col px-16 bg-white">
+            <div class="relative flex flex-wrap items-center justify-between w-full bg-white group py-7 shrink-0">
+                <div>
+                    <img class="h-16" src="img/Hotel IZY.png">
+                </div>
+                <div class="items-center justify-between hidden gap-12 text-black md:flex">
+                    <a href="home.html" class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Home</a>
+                    <a href="room.html" class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Rooms</a>
+                    <a href="reservations.html" class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Booking</a>
+                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">Contact Us</a>
+                    <a class="text-sm font-normal text-dark-grey-700 hover:text-dark-grey-900" href="">About Us</a>
+                </div>
+                <div class="items-center gap-8 md:flex">
+                    <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-yellow-700 text-white border border-yellow-700 hover:bg-white hover:text-yellow-700 transition duration-300">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boutons de navigation -->
+        <div class="flex justify-center bg-gray-100 py-4">
+            <button onclick="showSection('reservationForm')" class="px-6 py-2 mx-2 text-sm font-bold bg-yellow-500 text-white hover:bg-yellow-700 transition duration-300 rounded-lg">
+                Formulaire de Réservation
+            </button>
+            <button onclick="showSection('reservedRooms')" class="px-6 py-2 mx-2 text-sm font-bold bg-yellow-500 text-white hover:bg-yellow-700 transition duration-300 rounded-lg">
+                Liste des Chambres Réservées
+            </button>
+        </div>
+
+        <!-- Section Formulaire -->
+        <div id="reservationForm" class="container mx-auto mt-8 px-8 flex justify-center">
+            <div class="bg-gray-50 p-8 rounded-lg shadow-xl w-full max-w-lg">
+                <h2 class="text-3xl font-extrabold text-center text-dark-grey-900 mb-6">Formulaire de Réservation</h2>
+                <form>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="nom" class="block text-sm font-semibold text-gray-700">name</label>
+                            <input id="name" type="text" placeholder="Votre nom" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700">Email</label>
+                            <input id="email" type="email" placeholder="Votre email" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div>
+                            <label for="telephone" class="block text-sm font-semibold text-gray-700">Téléphone</label>
+                            <input id="telephone" type="tel" placeholder="Votre téléphone" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        
+                        <div id="date-range-picker" date-rangepicker class="flex items-center">
+                            
+                        <div class="relative max-w-sm">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            </div>
+                            <input datepicker id="dateStart" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                        </div>
+  
+                            <span class="mx-4 text-gray-500">to</span>
+                            <div class="relative max-w-sm">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                </div>
+                                <input datepicker id="dateLast" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 " placeholder="Select date">
+                            </div>
+                        </div>
+  
+                    </div>
+                    <button type="submit" class="mt-6 w-full py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-700 transition duration-300 max-w-xs mx-auto block">
+                        Réserver Maintenant
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Section Liste des Chambres Réservées -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 ml-16">
+            <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full flex">
+                <!-- Left Image -->
+                <img class="w-1/3 rounded-l-lg object-cover" src="img/room/double-room1.jpg" alt="Room History Image">
+              
+                <!-- Right Info -->
+                <div class="p-4 flex flex-col justify-between w-2/3">
+                  <h2 class="text-lg font-semibold mb-3">Deluxe Double Room</h2>
+                  
+                  <!-- Reservation Details -->
+                  <div class="text-gray-500 text-sm space-y-2 mb-4">
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-in:</span>
+                      <span>2024-12-25</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-out:</span>
+                      <span>2024-12-30</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Status:</span>
+                      <span class="text-green-500">Completed</span> <!-- Use text-red-500 for "Cancelled" or "Expired" -->
+                    </div>
+                  </div>
+              
+                  <!-- Footer -->
+                  <div class="flex items-center justify-between">
+                    <p class="text-base font-bold">$1,500 Total</p>
+                    <button class="px-4 py-2 bg-gray-200 text-black text-sm rounded hover:bg-gray-300 cursor-not-allowed">View Details</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full flex">
+                <!-- Left Image -->
+                <img class="w-1/3 rounded-l-lg object-cover" src="img/room/double-room1.jpg" alt="Room History Image">
+              
+                <!-- Right Info -->
+                <div class="p-4 flex flex-col justify-between w-2/3">
+                  <h2 class="text-lg font-semibold mb-3">Deluxe Double Room</h2>
+                  
+                  <!-- Reservation Details -->
+                  <div class="text-gray-500 text-sm space-y-2 mb-4">
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-in:</span>
+                      <span>2024-12-25</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-out:</span>
+                      <span>2024-12-30</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Status:</span>
+                      <span class="text-green-500">Completed</span> <!-- Use text-red-500 for "Cancelled" or "Expired" -->
+                    </div>
+                  </div>
+              
+                  <!-- Footer -->
+                  <div class="flex items-center justify-between">
+                    <p class="text-base font-bold">$1,500 Total</p>
+                    <button class="px-4 py-2 bg-gray-200 text-black text-sm rounded hover:bg-gray-300 cursor-not-allowed">View Details</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full flex">
+                <!-- Left Image -->
+                <img class="w-1/3 rounded-l-lg object-cover" src="img/room/double-room1.jpg" alt="Room History Image">
+              
+                <!-- Right Info -->
+                <div class="p-4 flex flex-col justify-between w-2/3">
+                  <h2 class="text-lg font-semibold mb-3">Deluxe Double Room</h2>
+                  
+                  <!-- Reservation Details -->
+                  <div class="text-gray-500 text-sm space-y-2 mb-4">
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-in:</span>
+                      <span>2024-12-25</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-out:</span>
+                      <span>2024-12-30</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Status:</span>
+                      <span class="text-green-500">Completed</span> <!-- Use text-red-500 for "Cancelled" or "Expired" -->
+                    </div>
+                  </div>
+              
+                  <!-- Footer -->
+                  <div class="flex items-center justify-between">
+                    <p class="text-base font-bold">$1,500 Total</p>
+                    <button class="px-4 py-2 bg-gray-200 text-black text-sm rounded hover:bg-gray-300 cursor-not-allowed">View Details</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full flex">
+                <!-- Left Image -->
+                <img class="w-1/3 rounded-l-lg object-cover" src="img/room/double-room1.jpg" alt="Room History Image">
+              
+                <!-- Right Info -->
+                <div class="p-4 flex flex-col justify-between w-2/3">
+                  <h2 class="text-lg font-semibold mb-3">Deluxe Double Room</h2>
+                  
+                  <!-- Reservation Details -->
+                  <div class="text-gray-500 text-sm space-y-2 mb-4">
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-in:</span>
+                      <span>2024-12-25</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Check-out:</span>
+                      <span>2024-12-30</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">Status:</span>
+                      <span class="text-green-500">Completed</span> <!-- Use text-red-500 for "Cancelled" or "Expired" -->
+                    </div>
+                  </div>
+              
+                  <!-- Footer -->
+                  <div class="flex items-center justify-between">
+                    <p class="text-base font-bold">$1,500 Total</p>
+                    <button class="px-4 py-2 bg-gray-200 text-black text-sm rounded hover:bg-gray-300 cursor-not-allowed">View Details</button>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+
+        <script>
+            function showSection(sectionId) {
+                document.getElementById('reservationForm').classList.add('hidden');
+                document.getElementById('reservedRooms').classList.add('hidden');
+                document.getElementById(sectionId).classList.remove('hidden');
+            }
+        </script>
+        <script src="js/reservation.js"></script>
+    </body>
+</html>
