@@ -1,5 +1,8 @@
 package com.hotel.hotelmanagement.services;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.hotel.hotelmanagement.entities.UserEntity;
@@ -34,16 +37,24 @@ public class UserServiceImpl implements UserService {
                 .filter(user -> user.getPassword().equals(password));
     }
 
-    @Override
-    public List<UserEntity> getAllUsers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllUsers'");
-    }
-
 
     @Override
     public void deleteUser(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+        userRepository.deleteById(id);
     }
+
+    @Override
+    public Page<UserEntity> getUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    public Page<UserEntity> getClients(int page, int size) {
+    Pageable pageable = PageRequest.of(page, size);
+    
+    // Requête pour récupérer les utilisateurs avec le rôle 'client'
+    return userRepository.findByRole("client", pageable);
+    }
+
+
+    
 }

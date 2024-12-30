@@ -10,6 +10,8 @@ import com.hotel.hotelmanagement.dto.ReservationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +51,28 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationRepository.save(reservation);
     }
+
+
+    @Override
+    public List<LocalDate> getOccupiedDates(int roomId, LocalDate startDate, LocalDate endDate) {
+        List<Reservation> reservations = reservationRepository.findByRoomIdAndDateRange(roomId, startDate, endDate);
+        List<LocalDate> occupiedDates = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            LocalDate resStart = reservation.getStartDate();
+            LocalDate resEnd = reservation.getEndDate();
+            while (!resStart.isAfter(resEnd)) {
+                if (!resStart.isBefore(startDate) && !resStart.isAfter(endDate)) {
+                    occupiedDates.add(resStart);
+                }
+                resStart = resStart.plusDays(1);
+            }
+        }
+
+        return occupiedDates;
+    }
+
+
     @Override
     public List<Reservation> getAllReservations() {
         // TODO Auto-generated method stub

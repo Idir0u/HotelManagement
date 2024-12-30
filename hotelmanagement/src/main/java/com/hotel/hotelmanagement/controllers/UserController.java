@@ -2,7 +2,9 @@ package com.hotel.hotelmanagement.controllers;
 import java.util.Map;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,4 +56,27 @@ public class UserController {
         session.invalidate();
         return "Logged out successfully!";
     }
+
+    @GetMapping("/clients")
+    public ResponseEntity<Page<UserEntity>> getClients(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Page<UserEntity> clients = userService.getClients(page, size);
+        return ResponseEntity.ok(clients);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable int id) {
+        UserEntity user = userService.getUserById(id);
+
+        if (user != null) {
+            userService.deleteUser(id);
+            return ResponseEntity.ok(Map.of("message", "Utilisateur supprimé"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Utilisateur non trouvé"));
+        }
+    }
+
+
+
 }

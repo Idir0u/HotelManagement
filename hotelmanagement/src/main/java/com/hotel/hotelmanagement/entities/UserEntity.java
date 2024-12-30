@@ -24,16 +24,16 @@ public class UserEntity {
     private String email;
     private String phoneNumber;
     private String password;
-    private String UserRole;
+    private String role;
 
     @PrePersist
     public void setDefaultRole() {
-        if (this.UserRole == null || this.UserRole.isEmpty()) {
-            this.UserRole = "client";
+        if (this.role == null || this.role.isEmpty()) {
+            this.role = "client";
         }
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Reservation> reservations;
 
