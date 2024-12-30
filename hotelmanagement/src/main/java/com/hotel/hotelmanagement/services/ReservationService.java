@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hotel.hotelmanagement.dto.ReservationRequest;
 import com.hotel.hotelmanagement.entities.Reservation;
+import com.hotel.hotelmanagement.entities.UserEntity;
 
 public interface ReservationService {
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hotel.hotelmanagement.entities.Room;
 import com.hotel.hotelmanagement.repositories.RoomRepository;
 
+import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -20,10 +21,6 @@ public class RoomServiceImpl implements RoomService {
     public Page<Room> getRooms(Integer priceMin, Integer priceMax, String type, Integer capacity, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return roomRepository.findRoomsWithFilters(priceMin, priceMax, type, capacity, pageable);
-    }
-
-    public Page<Room> getAllRooms(Pageable pageable){
-        return roomRepository.findAll(pageable);
     }
 
     @Override

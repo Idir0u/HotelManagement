@@ -51,9 +51,12 @@ public class ReservationServiceImpl implements ReservationService {
     }
     @Override
     public List<Reservation> getAllReservations() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllReservations'");
+        return reservationRepository.findAll();
     }
+    
+    
+    
+
 
     @Override
     public Reservation getReservationById(int id) {
