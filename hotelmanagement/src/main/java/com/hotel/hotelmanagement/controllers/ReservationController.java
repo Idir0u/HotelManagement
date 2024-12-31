@@ -3,10 +3,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.hotel.hotelmanagement.dto.ReservationRequest;
+import com.hotel.hotelmanagement.dto.UpdateReservationRequest;
 import com.hotel.hotelmanagement.entities.Reservation;
 import com.hotel.hotelmanagement.entities.Room;
 import com.hotel.hotelmanagement.entities.UserEntity;
@@ -15,6 +17,8 @@ import com.hotel.hotelmanagement.repositories.ReservationRepository;
 import com.hotel.hotelmanagement.repositories.RoomRepository;
 
 import com.hotel.hotelmanagement.repositories.UserRepository;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -41,6 +45,13 @@ public class ReservationController {
         System.out.println("I'm in Controller getAllReservations");
         return reservationService.getAllReservations(pageable);//reservationRepository.findAll(pageable);
     }
+    //===================================yasser=============================
+    @GetMapping("/user/{userId}")
+    public List<Reservation> getReservationsByUser(@PathVariable int userId) {
+        
+        return reservationRepository.findByUserId(userId);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<?> createReservation(@RequestBody ReservationRequest reservationRequest) {
@@ -73,6 +84,32 @@ public class ReservationController {
         reservation.setId(id);
         return reservationService.saveReservation(reservation);
     }
+
+    //===================================yasser=============================
+    
+    @PutMapping("/update/{reservationId}")
+public ResponseEntity<String> updateReservation(
+    @PathVariable int reservationId,
+    @RequestBody UpdateReservationRequest request
+) {
+    return reservationRepository.findById(reservationId).map(reservation -> {
+        // Mettre à jour les dates
+        reservation.setStartDate(request.getStartDate());
+        reservation.setEndDate(request.getEndDate());
+
+        // Recalcul automatique du montant total
+        long numberOfNights = java.time.temporal.ChronoUnit.DAYS.between(request.getStartDate(), request.getEndDate());
+        float newTotalAmount = numberOfNights * reservation.getRoom().getPrice();
+        reservation.setTotalAmount(newTotalAmount);
+
+        // Sauvegarder la réservation mise à jour
+        reservationRepository.save(reservation);
+
+        return ResponseEntity.ok("La réservation avec l'ID " + reservationId + " a été mise à jour avec succès.");
+    }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("La réservation avec l'ID " + reservationId + " n'existe pas."));
+}
+
+
 
     @DeleteMapping("/{id}")
     public void deleteReservation(@PathVariable int id) {

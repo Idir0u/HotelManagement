@@ -13,7 +13,6 @@ public interface ReservationService {
     Reservation createReservation(ReservationRequest reservationRequest);
     Page<Reservation> getAllReservations(Pageable pageable);
     Reservation getReservationById(int id);
-    Reservation getReservationByUserId(int userId);
     Reservation saveReservation(Reservation reservation);
     void deleteReservation(int id);
 }
