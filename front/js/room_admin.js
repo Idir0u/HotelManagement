@@ -1,3 +1,4 @@
+console.log("I'm in admin!!!!!!!!!!!!!!!!!!");
 let rooms = [];
 let defaultRooms = [
     { id: 1, type: 'Single', capacity: 1, price: 80, description: 'Perfectly designed for solo travelers or business guests who seek comfort and privacy in a cozy space equipped with modern amenities.', status: 'Available' },
@@ -61,12 +62,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fetchRooms(page = 1) {
-    fetch(`http://localhost:8081/rooms?page=${page - 1}&size=${rowsPerPage}`)
+console.log("I'm in fetch!!!!!!!!!!!!!!!!!!");
+
+    fetch(`http://localhost:8081/api/allrooms?page=${page - 1}&size=${rowsPerPage}`)
         .then(response => response.json())
         .then(data => {
+            console.log("data:", data);
             rooms = data.content;
             populateTable();
-            
+            showSuccessPopup('Room added successfully!');
             updatePagination(data.totalPages, page);
         })
         .catch(error => {
@@ -127,6 +131,7 @@ function editRoomApi(roomID, updatedRoom) {
     .then(data => {
         const index = rooms.findIndex(room => room.id === roomID);
         rooms[index] = data;
+        showSuccessPopup('Room edited successfully!');
         populateTable();
     })
     .catch(error => {
@@ -145,8 +150,7 @@ function deleteRoomApi(roomID) {
             throw new Error(error.message);
         });
         }
-        let row = document.getElementById('roomTableBody').querySelector(`tr td:first-child:contains(${roomID})`).parentNode;
-        document.getElementById('roomTableBody').removeChild(row);
+        showSuccessPopup('Room deleted successfully!');
 
     })
     .catch(error => {
@@ -167,7 +171,8 @@ function populateTable() {
             <td>${room.capacity}</td>
             <td>$${room.price}</td>
             <td class="description">${room.description}</td>
-            <td>${room.status}</td>
+            <td>${room.occupied === false ? 'Available' : 'Occupied'}</td>
+             
             <td>
                 <button class="btn waves-effect waves-light blue modal-trigger edit-room-button" data-target="editRoomModal" data-id="${room.id}">
                     <i class="material-icons">edit</i>
@@ -264,12 +269,13 @@ function goToPage(page) {
 function addRoom() {
     document.getElementById('addRoomForm').onsubmit = function(event) {
         event.preventDefault();
+        console.log("status in addRoom:", document.getElementById('status').value );
         var newRoom = {
             type: document.getElementById('roomType').value,
             capacity: document.getElementById('capacity').value,
             price: document.getElementById('price').value,
             description: document.getElementById('description').value,
-            status: document.getElementById('status').value
+            occupied: document.getElementById('status').value == 'Occupied' ? true : false
         };
         addRoomApi(newRoom);
         M.Modal.getInstance(document.getElementById('addRoomModal')).close();
@@ -279,14 +285,23 @@ function addRoom() {
 }
 
 function editRoom(roomID) {
+    var room = rooms.find(room => room.id === roomID);
+        console.log("room: ", room);
+        document.getElementById('editRoomType').value = room.type;
+        document.getElementById('editCapacity').value = room.capacity;
+        document.getElementById('editPrice').value = room.price;
+        document.getElementById('editDescription').value = room.description;
+        document.getElementById('editStatus').value = room.occupied ? 'Occupied' : 'Available';
+
     document.getElementById('editRoomForm').onsubmit = function(event) {
         event.preventDefault();
+        console.log("status in editRoom:", document.getElementById('editStatus').value );
         var updatedRoom = {
             type: document.getElementById('editRoomType').value,
             capacity: document.getElementById('editCapacity').value,
             price: document.getElementById('editPrice').value,
             description: document.getElementById('editDescription').value,
-            status: document.getElementById('editStatus').value
+            occupied: document.getElementById('editStatus').value === 'Occupied' ? true : false
         };
         editRoomApi(roomID, updatedRoom);
         M.Modal.getInstance(document.getElementById('editRoomModal')).close();
@@ -315,11 +330,11 @@ function viewRoom(roomID) {
     var capacity = room.capacity;
     var price = room.price;
     var description = room.description;
-    var status = room.status;
+    var status = room.status === true ? 'Occupied' : 'Available';
     //console.log("roomtype:" , roomType);
 
     var imageSrc;
-    switch (roomType.toLowerCase()) {
+    switch (roomType.replace(' Room', '').toLowerCase()) {
         case 'single':
             imageSrc = 'single-room.jpg';
             break;
@@ -360,27 +375,52 @@ function viewRoom(roomID) {
     document.getElementById('roomDetails').innerHTML = roomDetails;
 }
 
-function showErrorPopup(message) {
-    const errorPopup = document.createElement('div');
-    errorPopup.className = 'error-popup';
-    errorPopup.innerHTML = `
-        <div class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50 bg-red-500 text-white p-4 rounded-lg shadow-lg w-1/3">
+    function showErrorPopup(message) {
+        const errorPopup = document.createElement('div');
+        errorPopup.className = 'error-popup';
+        errorPopup.innerHTML = `
+            <div class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50 bg-red-500 text-white p-4 rounded-lg shadow-lg w-1/3">
+                <div class="flex justify-between items-center">
+                    <p>${message}</p>
+                    <span class="error-popup-close cursor-pointer text-xl">&times;</span>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(errorPopup);
+
+        const closeBtn = errorPopup.querySelector('.error-popup-close');
+        closeBtn.onclick = function() {
+            document.body.removeChild(errorPopup);
+        };
+
+        setTimeout(() => {
+            if (document.body.contains(errorPopup)) {
+                document.body.removeChild(errorPopup);
+            }
+        }, 5000);
+    }
+
+function showSuccessPopup(message) {
+    const successPopup = document.createElement('div');
+    successPopup.className = 'success-popup';
+    successPopup.innerHTML = `
+        <div class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50 bg-green-500 text-white p-4 rounded-lg shadow-lg w-1/3">
             <div class="flex justify-between items-center">
                 <p>${message}</p>
-                <span class="error-popup-close cursor-pointer text-xl">&times;</span>
+                <span class="success-popup-close cursor-pointer text-xl">&times;</span>
             </div>
         </div>
     `;
-    document.body.appendChild(errorPopup);
+    document.body.appendChild(successPopup);
 
-    const closeBtn = errorPopup.querySelector('.error-popup-close');
+    const closeBtn = successPopup.querySelector('.success-popup-close');
     closeBtn.onclick = function() {
-        document.body.removeChild(errorPopup);
+        document.body.removeChild(successPopup);
     };
 
     setTimeout(() => {
-        if (document.body.contains(errorPopup)) {
-            document.body.removeChild(errorPopup);
+        if (document.body.contains(successPopup)) {
+            document.body.removeChild(successPopup);
         }
     }, 5000);
 }

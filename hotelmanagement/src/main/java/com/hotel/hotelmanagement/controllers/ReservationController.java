@@ -1,6 +1,8 @@
 package com.hotel.hotelmanagement.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,6 @@ import com.hotel.hotelmanagement.repositories.ReservationRepository;
 import com.hotel.hotelmanagement.repositories.RoomRepository;
 
 import com.hotel.hotelmanagement.repositories.UserRepository;
-import jakarta.servlet.http.HttpSession;
-
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,39 +35,38 @@ public class ReservationController {
     private ReservationRepository reservationRepository; 
 
     @GetMapping
-    public List<Reservation> getAllReservations() {
-        return reservationService.getAllReservations();
+    public Page<Reservation> getAllReservations(@RequestParam(defaultValue = "0") int page,
+                                                @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        System.out.println("I'm in Controller getAllReservations");
+        return reservationService.getAllReservations(pageable);//reservationRepository.findAll(pageable);
     }
 
     @PostMapping("/create")
-public ResponseEntity<?> createReservation(@RequestBody ReservationRequest reservationRequest) {
-    Optional<Room> room = roomRepository.findById(reservationRequest.getRoomId());
-    Optional<UserEntity> user = userRepository.findById(reservationRequest.getUserId());
+    public ResponseEntity<?> createReservation(@RequestBody ReservationRequest reservationRequest) {
+        Optional<Room> room = roomRepository.findById(reservationRequest.getRoomId());
+        Optional<UserEntity> user = userRepository.findById(reservationRequest.getUserId());
 
-    if (!room.isPresent()) {
-        return ResponseEntity.badRequest().body("Room not found.");
+        if (!room.isPresent()) {
+            return ResponseEntity.badRequest().body("Room not found.");
+        }
+
+        Reservation reservation = new Reservation();
+        reservation.setRoom(room.get());
+        reservation.setStartDate(reservationRequest.getStartDate());
+        reservation.setEndDate(reservationRequest.getEndDate());
+        reservation.setTotalAmount(reservationRequest.getTotalAmount());
+
+        if (user.isPresent()) {
+            reservation.setUser(user.get());
+        } else {
+            reservation.setUser(null);
+        }
+
+        reservationRepository.save(reservation);
+
+        return ResponseEntity.ok(Map.of("reservationId", reservation.getId()));
     }
-
-    Reservation reservation = new Reservation();
-    reservation.setRoom(room.get());
-    reservation.setStartDate(reservationRequest.getStartDate());
-    reservation.setEndDate(reservationRequest.getEndDate());
-    reservation.setTotalAmount(reservationRequest.getTotalAmount());
-    
-    if (user.isPresent()) {
-        reservation.setUser(user.get());  // Make sure to set the user if found
-    } else {
-        reservation.setUser(null);  // If the user doesn't exist (null), set it to null
-    }
-
-    reservationRepository.save(reservation);  // Save reservation to DB
-
-    return ResponseEntity.ok(Map.of("reservationId", reservation.getId()));
-}
-
-
-    
-
 
     @PutMapping("/{id}")
     public Reservation updateReservation(@PathVariable int id, @RequestBody Reservation reservation) {

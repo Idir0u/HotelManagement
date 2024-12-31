@@ -5,12 +5,15 @@ import com.hotel.hotelmanagement.entities.Room;
 import com.hotel.hotelmanagement.entities.UserEntity;
 import com.hotel.hotelmanagement.repositories.RoomRepository;
 import com.hotel.hotelmanagement.repositories.UserRepository;
-import com.hotel.hotelmanagement.repositories.ReservationRepository; // Add this import
+import com.hotel.hotelmanagement.repositories.ReservationRepository;
 import com.hotel.hotelmanagement.dto.ReservationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
@@ -23,7 +26,7 @@ public class ReservationServiceImpl implements ReservationService {
     private RoomRepository roomRepository;
 
     @Autowired
-    private ReservationRepository reservationRepository; // Add this line to inject the repository
+    private ReservationRepository reservationRepository;
 
     @Override
     public Reservation createReservation(ReservationRequest reservationRequest) {
@@ -40,42 +43,38 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setEndDate(reservationRequest.getEndDate());
         reservation.setTotalAmount(reservationRequest.getTotalAmount());
 
-        // Make sure user is set if the user exists
         if (user.isPresent()) {
             reservation.setUser(user.get());
         } else {
-            reservation.setUser(null); // set user to null if not logged in
+            reservation.setUser(null);
         }
 
         return reservationRepository.save(reservation);
     }
+
     @Override
-    public List<Reservation> getAllReservations() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllReservations'");
+    public Page<Reservation> getAllReservations(Pageable pageable){
+        
+        return reservationRepository.findAll(pageable);
     }
 
     @Override
     public Reservation getReservationById(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReservationById'");
+        return reservationRepository.findById(id).orElse(null);
     }
 
     @Override
     public Reservation getReservationByUserId(int userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReservationByUserId'");
+        return reservationRepository.findByUserId(userId);
     }
 
     @Override
     public Reservation saveReservation(Reservation reservation) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveReservation'");
+        return reservationRepository.save(reservation);
     }
 
     @Override
     public void deleteReservation(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteReservation'");
+        reservationRepository.deleteById(id);
     }
 }
